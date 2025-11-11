@@ -1,66 +1,67 @@
-// Importar dependencias
-require('dotenv').config(); // Carga las variables de entorno desde .env
+// 1. Cargar las variables de entorno desde el archivo .env
+require('dotenv').config();
+
+// 2. Importar las dependencias necesarias
 const express = require('express');
-const cors = 'require'('cors');
+const cors = require('cors');
 const { Resend } = require('resend');
 
-// Inicializar la aplicación Express
+// 3. Inicializar Express y Resend
 const app = express();
+// Aquí leemos la clave secreta desde process.env (cargada desde .env)
+const resend = new Resend(process.env.RESEND_API_KEY); 
+const myEmail = process.env.MY_PERSONAL_EMAIL;
 
-// Configurar Resend con la API Key
-const resend = new Resend(process.env.RESEND_API_KEY);
-const myEmail = process.env.MY_PERSONAL_EMAIL; // Tu email para recibir los mensajes
+// 4. Configurar Middlewares
+app.use(express.json()); // Para poder leer JSON en el body de la petición
+// Leemos la URL del frontend desde las variables de entorno para configurar CORS
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
-// Middlewares
-// Habilitar CORS para permitir peticiones desde el frontend.
-// Es crucial para la seguridad y el funcionamiento.
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' })); 
-app.use(express.json()); // Permitir que Express parsee el body de las peticiones como JSON
-
-// Ruta de Health Check (buena práctica para verificar que la API está viva)
-app.get('/api', (req, res) => {
-  res.status(200).send('API is running.');
-});
-
-// Endpoint para procesar el formulario de contacto
+// 5. Definir la ruta que manejará el envío del formulario
 app.post('/api/contact', async (req, res) => {
   try {
+    // Extraemos los datos enviados desde el formulario en el frontend
     const { name, email, message } = req.body;
 
-    // 1. Validación simple de los datos de entrada
+    // Validación básica en el servidor
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
 
-    // 2. Envío del correo electrónico usando Resend
+    // ESTA ES LA LÓGICA PARA ENVIAR EL EMAIL
+    // Se ejecuta solo cuando se recibe una petición POST en esta ruta.
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Dominio por defecto de Resend, no cambiar
-      to: [myEmail],
-      subject: `Nuevo mensaje de contacto de ${name}`,
-      reply_to: email, // Permite responder directamente al email del remitente
-      html: `<p><strong>Nombre:</strong> ${name}</p>
-             <p><strong>Email:</strong> ${email}</p>
-             <p><strong>Mensaje:</strong></p>
-             <p>${message}</p>`
+      from: 'Portfolio Contact Form <onboarding@resend.dev>',
+      to: [myEmail], // El email se lee de tus variables de entorno
+      subject: `Nuevo mensaje de tu Portfolio de: ${name}`,
+      reply_to: email, // El email del usuario que llenó el formulario
+      html: `
+        <h1>Nuevo Contacto desde tu Portfolio</h1>
+        <p><strong>Nombre:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <hr>
+        <p><strong>Mensaje:</strong></p>
+        <p>${message}</p>
+      `
     });
 
+    // Manejo de errores de la API de Resend
     if (error) {
-      // Si Resend devuelve un error
       console.error({ error });
-      return res.status(500).json({ error: 'Error al enviar el mensaje.' });
+      return res.status(500).json({ error: 'Hubo un error al intentar enviar el email.' });
     }
-    
-    // 3. Respuesta de éxito al frontend
-    res.status(200).json({ message: 'Mensaje enviado correctamente.' });
 
-  } catch (err) {
-    console.error(err);
+    // Si todo fue exitoso, enviamos una respuesta positiva al frontend
+    res.status(200).json({ message: 'Mensaje enviado con éxito.' });
+
+  } catch (serverError) {
+    console.error(serverError);
     res.status(500).json({ error: 'Error interno del servidor.' });
   }
 });
 
-// Iniciar el servidor
+// 6. Iniciar el servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+  console.log(`API Server escuchando en http://localhost:${PORT}`);
 });

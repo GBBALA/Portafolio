@@ -1,12 +1,17 @@
 // Base styles
-@import 'base/reset';
-@import 'base/typography';
+@use 'base/reset';
+@use 'base/typography';
 
 // Layout
-@import 'layout/grid';
-@import 'layout/navigation';
+@use 'layout/grid';
+@use 'layout/navigation';
 
 // Components
-@import 'components/header';
-@import 'components/button';
-@import 'components/card';
+@use 'components/header';
+@use 'components/button';
+@use 'components/card';
+
+// Importa los estilos de los componentes específicos de la página
+// Es buena práctica importarlos después de los globales/reutilizables
+@use '../../components/Projects/Projects.scss';
+@use '../../components/Contact/Contact.scss';
