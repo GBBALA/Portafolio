@@ -1,0 +1,93 @@
+/* Block: .projects */
+.projects {
+  padding: 4rem 0;
+  background-color: #fff;
+
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Block: .card (usado dentro de .projects) */
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__description {
+    flex-grow: 1; /* Para que todos los cards tengan la misma altura */
+    margin-bottom: 1rem;
+  }
+
+  &__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__tag {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto; /* Empuja los botones al final */
+  }
+}
+
+/* Block: .button (reutilizable) */
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Modifier: --primary */
+  &--primary {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  /* Modifier: --secondary */
+  &--secondary {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+
+    &:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+  }
+}
