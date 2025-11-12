@@ -1,23 +1,31 @@
 import React from 'react';
-import './Projects.scss'; // Asegúrate de crear este archivo SCSS
+import './Projects.scss';
 
-// Datos de ejemplo. Idealmente, esto vendría de una API o un archivo JSON.
+// Datos de los proyectos. Mantener los datos separados de la lógica de renderizado es una buena práctica.
 const projectData = [
   {
     id: 1,
-    title: 'Sistema de Gestión de Clientes',
-    description: 'Una aplicación web full-stack desarrollada con Node.js, Express, React y PostgreSQL. Permite la gestión de clientes, facturación y reportes.',
-    tags: ['React', 'Node.js', 'PostgreSQL', 'Express'],
-    liveUrl: '#',
-    repoUrl: '#'
+    title: 'Plataforma E-commerce "GamerStore Genezis"',
+    description: 'Proyecto full-stack que simula una tienda de productos gamer. Desarrollé una API RESTful con Java y Spring Boot para gestionar productos, usuarios y órdenes, y un frontend dinámico y responsivo con React. El sistema incluye autenticación de usuarios y roles.',
+    tags: ['React', 'Java', 'Spring Boot', 'MySQL', 'API REST', 'Vercel'],
+    liveUrl: 'https://gamerstore-genezis.vercel.app/',
+    repoUrl: 'https://github.com/PowerSystem2024/Genezis-Repo-Frontend-Ecommerce'
   },
   {
     id: 2,
-    title: 'E-commerce de Ropa Deportiva',
-    description: 'Plataforma de comercio electrónico con pasarela de pago Stripe, autenticación de usuarios y un panel de administración para gestionar productos.',
-    tags: ['Vue.js', 'Stripe', 'MongoDB', 'SCSS'],
-    liveUrl: '#',
-    repoUrl: '#'
+    title: 'Aplicación Móvil Nativa para Android',
+    description: 'Desarrollo de una aplicación Android nativa utilizando Java. La aplicación demuestra mis habilidades en el ecosistema móvil, incluyendo la gestión del ciclo de vida de actividades, diseño de interfaces de usuario y consumo de datos.',
+    tags: ['Android', 'Java', 'Mobile'],
+    liveUrl: '#', // No hay demo en vivo
+    repoUrl: 'https://github.com/PowerSystem2024/PowerSystem2024-App-StartUp-Genezis'
+  },
+  {
+    id: 3,
+    title: 'Sistema de Gestión de Escritorio',
+    description: 'Aplicación de escritorio desarrollada en Java como parte de un proyecto académico. El proyecto se enfoca en la lógica de negocio, la interacción con bases de datos y los principios de la POO.',
+    tags: ['Java', 'Desktop App', 'OOP'],
+    liveUrl: '#', // Sin demo en vivo
+    repoUrl: 'https://github.com/PowerSystem2024/Genezis-Repo-Cuarto-Semestre'
   }
 ];
 
@@ -37,8 +45,20 @@ const Projects = () => {
                 ))}
               </ul>
               <div className="card__links">
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="button button--primary">Ver Demo</a>
-                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="button button--secondary">Ver Código</a>
+                {/* 
+                  Lógica de renderizado condicional:
+                  El operador '&&' en JSX funciona como un "if" corto.
+                  Si la condición (project.liveUrl && project.liveUrl !== '#') es verdadera,
+                  el elemento a la derecha del '&&' será renderizado. Si es falsa, no se renderizará nada.
+                */}
+                {project.liveUrl && project.liveUrl !== '#' && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="button button--primary">
+                    Ver Demo
+                  </a>
+                )}
+                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="button button--secondary">
+                  Ver Código
+                </a>
               </div>
             </div>
           ))}

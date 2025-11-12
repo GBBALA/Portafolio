@@ -1,0 +1,81 @@
+@use '../../assets/styles/base/variables' as *;
+
+// src/components/Header/Header.scss
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  // Efecto Glassmorphism
+  background-color: rgba(255, 255, 255, 0.8); // Fondo blanco con 80% de opacidad
+  backdrop-filter: blur(10px); // El desenfoque clave del fondo
+  -webkit-backdrop-filter: blur(10px); // Soporte para Safari
+  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Un borde sutil
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 1000;;
+
+  &__container {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $header-height;
+  }
+
+  &__logo {
+    font-family: $font-family-headings;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: $dark-color;
+    text-decoration: none;
+  }
+
+  &__nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem; // Mayor separación
+    align-items: center;
+    padding: 0;
+  }
+
+  &__nav-link {
+    font-family: $font-family-headings;
+    font-size: 1rem;
+    color: $light-text-color;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color $transition-speed ease;
+    position: relative;
+    padding-bottom: 0.5rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: $primary-color;
+      transition: width $transition-speed ease;
+    }
+
+    &:hover {
+      color: $primary-color;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .button { // Estilo específico para el botón dentro del nav
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+  }
+}

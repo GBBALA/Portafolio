@@ -1,17 +1,26 @@
-// Base styles
+/**
+ * ===================================================================
+ * PUNTO DE ENTRADA PRINCIPAL DE SCSS
+ *
+ * Orden de importación según la arquitectura ITCSS:
+ * 1. Módulos de Sass (@use) para cargar variables, mixins, etc.
+ * 2. Dependencias externas (ej. fuentes).
+ * 3. Estilos base (reset, tipografía).
+ * 4. Layout (grid, etc).
+ * 5. Componentes globales (botones, tarjetas).
+ * ===================================================================
+ */
+
+// 1. MÓDULOS DE SASS
+// Todas las sentencias @use DEBEN ir primero, sin excepción.
+@use 'base/variables';
 @use 'base/reset';
 @use 'base/typography';
-
-// Layout
 @use 'layout/grid';
-@use 'layout/navigation';
-
-// Components
-@use 'components/header';
 @use 'components/button';
 @use 'components/card';
 
-// Importa los estilos de los componentes específicos de la página
-// Es buena práctica importarlos después de los globales/reutilizables
-@use '../../components/Projects/Projects.scss';
-@use '../../components/Contact/Contact.scss';
+// 2. DEPENDENCIAS EXTERNAS
+// Una vez que todos los módulos de Sass han sido cargados,
+// podemos añadir reglas de CSS estándar como @import.
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500&display=swap');

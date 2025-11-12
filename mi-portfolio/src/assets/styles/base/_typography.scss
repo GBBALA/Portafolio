@@ -1,0 +1,23 @@
+// src/assets/styles/base/_typography.scss
+
+@use 'variables' as *; // <-- Ahora esta es la primera línea, como debe ser
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $header-height;
+}
+
+body {
+  font-family: $font-family-body;
+  font-weight: 400;
+  color: $text-color;
+  background-color: $white-color;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headings;
+  font-weight: 700;
+  color: $dark-color;
+  line-height: 1.3;
+}
