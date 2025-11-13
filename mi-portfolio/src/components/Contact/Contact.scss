@@ -1,55 +1,36 @@
-/* Block: .contact */
+@use '../../assets/styles/base/variables' as *;
+
 .contact {
-  padding: 4rem 2rem;
-  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 0 auto 100px;
+  padding: 100px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &__title {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  &__subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    color: #666;
-  }
-
-  &__form {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
-  }
-
-  &__status {
-    margin-top: 1.5rem;
-    font-weight: bold;
-    color: #007bff;
-  }
-}
-
-/* Elemento reutilizable: .form-group */
-.form-group {
-  margin-bottom: 1.5rem;
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-  }
-
-  input,
-  textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-
-    &:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  .section-title {
+    // Para que el título numerado también se centre
+    justify-content: center;
+    &::after {
+      display: none; // No queremos la línea en esta sección
     }
+  }
+
+  &__tagline {
+    font-family: $font-family-mono;
+    color: $accent-color;
+    font-size: $font-size-base;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    color: $dark-text-color;
+    margin-bottom: 3rem;
+  }
+
+  &__button {
+    font-size: $font-size-base;
+    padding: 1.25rem 2.5rem;
   }
 }

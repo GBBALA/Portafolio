@@ -5,30 +5,26 @@
   align-items: center;
   gap: 1rem;
   font-size: clamp(1.5rem, 5vw, 2rem);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   width: 100%;
   white-space: nowrap;
+  color: $white-color;
 
-  // -- ANIDAMIENTO CORREGIDO --
-  // Ahora, & se refiere correctamente a .section-title
-
-  // El número antes del título
   &::before {
-    content: var(--section-counter); // Usa la variable CSS
-    font-family: 'SF Mono', 'Fira Code', monospace;
+    content: var(--section-counter);
+    font-family: $font-family-mono;
     font-size: 1.25rem;
     color: $accent-color;
     font-weight: 400;
   }
 
-  // La línea después del título
   &::after {
     content: '';
     display: block;
     width: 100%;
     max-width: 300px;
     height: 1px;
-    background-color: $light-bg-color; // Una línea sutil
+    background-color: $light-bg-color;
     margin-left: 1.5rem;
   }
 }

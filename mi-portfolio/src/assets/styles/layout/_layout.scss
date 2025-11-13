@@ -1,0 +1,24 @@
+@use '../base/variables' as *;
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  margin: 0 auto; // <-- LA LÍNEA MÁGICA PARA CENTRAR
+  width: 100%;
+  max-width: 1600px; // Un ancho máximo generoso
+  padding: 0 150px; // <-- PADDING LATERAL IMPORTANTE
+
+  // Media queries para ajustar el padding en pantallas más pequeñas
+  @media (max-width: 1080px) {
+    padding: 0 100px;
+  }
+  @media (max-width: 768px) {
+    padding: 0 50px;
+  }
+  @media (max-width: 480px) {
+    padding: 0 25px;
+  }
+}

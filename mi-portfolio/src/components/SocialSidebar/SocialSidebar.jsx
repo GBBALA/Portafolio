@@ -1,7 +1,7 @@
-// src/components/SocialSidebar/SocialSidebar.jsx
-
 import React from 'react';
 import './SocialSidebar.scss';
+// Recuerda instalar react-icons: npm install react-icons
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 
 const SocialSidebar = () => {
   return (
@@ -9,13 +9,12 @@ const SocialSidebar = () => {
       <ul>
         <li>
           <a href="https://github.com/GBBALA" target="_blank" rel="noopener noreferrer" title="GitHub">
-            {/* Aquí puedes usar un ícono SVG si lo deseas */}
-            GH
+            <FiGithub />
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/javier-quiroga-045940379/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-            LI
+          <a href="https://www.linkedin.com/in/javier-quiroga-diaz/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <FiLinkedin />
           </a>
         </li>
       </ul>

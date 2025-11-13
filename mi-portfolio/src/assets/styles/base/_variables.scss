@@ -1,6 +1,4 @@
-// src/assets/styles/base/_variables.scss
-
-// -- NUEVA PALETA DE COLORES (TEMA OSCURO) --
+// Paleta de Colores - Tema Oscuro Profesional
 $accent-color: #64ffda;
 $accent-color-dark: #32c2a2;
 $bg-color: #0a192f;
@@ -9,20 +7,20 @@ $text-color: #ccd6f6;
 $dark-text-color: #8892b0;
 $white-color: #ffffff;
 
-// -- VARIABLES DE TIPOGRAFÍA Y ESPACIADO --
+// Tipografía
 $font-family-headings: 'Poppins', sans-serif;
 $font-family-body: 'Roboto', sans-serif;
+$font-family-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
 // Tamaños de Fuente
-$font-size-base: 1rem;      // 16px por defecto
-$font-size-lg: 1.125rem;    // 18px para subtítulos o texto grande
-$font-size-sm: 0.875rem;    // 14px para texto pequeño
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-sm: 0.875rem;
 
 // Layout
-$container-width: 1200px;
+$container-width: 1100px;
 $header-height: 80px;
 
 // Otros
-$border-radius: 8px;
-$box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-$transition-speed: 0.3s;
+$border-radius: 4px;
+$transition-speed: 0.25s;

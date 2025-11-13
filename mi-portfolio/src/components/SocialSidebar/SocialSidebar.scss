@@ -3,11 +3,10 @@
 .social-sidebar {
   position: fixed;
   bottom: 0;
-  left: 40px; // Posición a la izquierda
+  left: 40px;
   width: 40px;
   z-index: 100;
 
-  // La línea vertical decorativa
   &::after {
     content: '';
     display: block;
@@ -29,10 +28,10 @@
   }
 
   a {
-    font-family: 'SF Mono', 'Fira Code', monospace; // Fuentes monoespaciadas para un look "tech"
     font-size: 1.25rem;
     color: $dark-text-color;
     transition: all $transition-speed ease;
+    display: inline-block;
 
     &:hover {
       color: $accent-color;
@@ -40,7 +39,6 @@
     }
   }
 
-  // Ocultar en pantallas pequeñas
   @media (max-width: 768px) {
     display: none;
   }

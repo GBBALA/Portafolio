@@ -1,75 +1,82 @@
-.about {
-  padding: 4rem 1.5rem;
-  background-color: #ffffff;
+@use '../../assets/styles/base/variables' as *;
 
-  &__title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-  }
+.about {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 0;
 
   &__content {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
 
-  &__image-container {
-    flex-shrink: 0; // Evita que la imagen se encoja
-  }
-
-  &__image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%; // Imagen circular
-    object-fit: cover; // Asegura que la imagen no se distorsione
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__text {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #555;
-
     p {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      color: $dark-text-color;
+      font-size: $font-size-lg;
+    }
+    strong {
+      color: $accent-color;
+      font-weight: 500;
+    }
+    .button {
+      margin-top: 1rem;
     }
   }
-  .about__text {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #555;
 
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: #333;
-    line-height: 1.4;
+  &__image-container {
+    position: relative;
+    max-width: 300px;
+    
+    @media (max-width: 768px) {
+      margin: 50px auto 0;
+    }
   }
 
-  p {
-    margin-bottom: 1.5rem;
+  &__image-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: $border-radius;
+    background-color: $accent-color;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid $accent-color;
+      border-radius: $border-radius;
+      z-index: -1;
+      transition: all $transition-speed ease;
+    }
+
+    &:hover::after {
+      top: 10px;
+      left: 10px;
+    }
   }
 
-  strong {
-    color: #007bff; // Color de acento para las tecnologías
-    font-weight: 600;
-  }
+  &__image {
+    position: relative;
+    width: 100%;
+    border-radius: $border-radius;
+    mix-blend-mode: multiply;
+    filter: grayscale(100%) contrast(1);
+    transition: all $transition-speed ease;
 
-  .button {
-    margin-top: 1rem;
-  }
-}
-
-
-  // Media query para responsividad
-  @media (max-width: 768px) {
-    &__content {
-      flex-direction: column;
-      text-align: center;
+    &:hover {
+      mix-blend-mode: normal;
+      filter: none;
     }
   }
 }

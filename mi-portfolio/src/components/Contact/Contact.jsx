@@ -1,73 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Contact.scss';
 
-// La URL de tu API. Usamos una variable de entorno para flexibilidad.
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState(''); // Para mostrar mensajes de éxito o error
-  
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('Enviando...');
-
-    try {
-      const response = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Algo salió mal.');
-      }
-      
-      setStatus('¡Mensaje enviado con éxito!');
-      setFormData({ name: '', email: '', message: '' }); // Limpiar formulario
-
-    } catch (error) {
-      setStatus(`Error: ${error.message}`);
-    }
-  };
-
   return (
     <section id="contact" className="contact">
-      <div className="container">
-        {/* Título actualizado: Usando section-title con contador '04.' */}
-        <h2 
-          className="section-title" 
-          style={{'--section-counter': "'04.'"}}
-        >
-          Contacto
-        </h2>
-        <form name="contact" onSubmit={handleSubmit} className="contact__form">
-          <div className="form-group">
-            <label htmlFor="name">Nombre</label>
-            <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Correo Electrónico</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">Mensaje</label>
-            <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} required></textarea>
-          </div>
-          <button type="submit" className="button button--primary">Enviar Mensaje</button>
-        </form>
-        {status && <p className="contact__status">{status}</p>}
-      </div>
+      <h2 className="section-title" style={{'--section-counter': "'03.'"}}>Contacto</h2>
+      <h3 className="contact__tagline">¿Interesado en Colaborar?</h3>
+      <p className="contact__text">
+        Actualmente estoy abierto a nuevas oportunidades y mi bandeja de entrada está siempre disponible. Si tienes alguna pregunta, una propuesta o simplemente quieres saludar, ¡no dudes en escribirme! Haré todo lo posible por responderte.
+      </p>
+      <a 
+        href="mailto:quiroga.diaz.javier.ed@gmail.com" 
+        className="button button--primary contact__button"
+      >
+        ¡Saluda!
+      </a>
     </section>
   );
 };

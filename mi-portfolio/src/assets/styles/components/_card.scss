@@ -1,12 +1,11 @@
 @use '../base/variables' as *;
 
 .card {
-  background-color: $light-bg-color; // Usamos el color de fondo más claro
+  background-color: $light-bg-color;
   border-radius: $border-radius;
-  padding: 1.75rem; // Un poco más de padding
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  // Sombra sutil para dar profundidad en un fondo oscuro
   box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
   transition: transform $transition-speed ease, box-shadow $transition-speed ease;
 
@@ -18,13 +17,13 @@
   &__title {
     font-size: 1.5rem;
     margin-bottom: 0.75rem;
-    color: $white-color; // Título en blanco
+    color: $white-color;
   }
 
   &__description {
     flex-grow: 1;
     margin-bottom: 1.5rem;
-    color: $dark-text-color; // Texto secundario
+    color: $dark-text-color;
     font-size: 1rem;
   }
 
@@ -38,13 +37,13 @@
   }
 
   &__tag {
-    background-color: rgba($accent-color, 0.1); // Fondo de acento con opacidad
-    color: $accent-color; // Texto de acento
+    background-color: rgba($accent-color, 0.1);
+    color: $accent-color;
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: 500;
-    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace; // Tipografía monoespaciada para tags
+    font-family: $font-family-mono;
   }
 
   &__links {
