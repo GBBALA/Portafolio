@@ -5,15 +5,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  
+
   // Efecto Glassmorphism sobre fondo oscuro
   background-color: rgba($bg-color, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  
+
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
   z-index: 1000;
-  transition: top $transition-speed ease; // Para un efecto de ocultar/mostrar (futuro)
+  // Esta línea aplica la transición suave para el efecto de scroll
+  transition: top $transition-speed ease; 
 
   &__container {
     max-width: $container-width;
@@ -48,7 +49,7 @@
     font-weight: 500;
     text-decoration: none;
     transition: color $transition-speed ease;
-    
+
     &:hover {
       color: $accent-color;
     }
@@ -57,5 +58,13 @@
   .button {
     font-size: 0.9rem;
     padding: 0.5rem 1.25rem;
+  }
+  
+  // -------------------------------------------------------------------
+  // AÑADIDO: Estilo para ocultar el header cuando se hace scroll hacia abajo
+  // -------------------------------------------------------------------
+  &--hidden {
+    // Mueve el header fuera de la pantalla por la altura definida
+    top: -($header-height); 
   }
 }

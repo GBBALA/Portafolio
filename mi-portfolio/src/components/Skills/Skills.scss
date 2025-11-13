@@ -1,46 +1,41 @@
+// src/components/Skills/Skills.scss
+@use '../../assets/styles/base/variables' as *;
+
 .skills {
-  padding: 4rem 1.5rem;
-  background-color: #f4f7f6;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 100px 0;
 
-  &__title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+  &__intro {
+    color: $dark-text-color;
+    margin-bottom: 2rem;
   }
 
-  &__grid {
+  &__list {
+    list-style: none;
+    padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-}
+    grid-template-columns: repeat(2, minmax(140px, 300px));
+    gap: 10px 20px;
 
-.skill-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
+    li {
+      position: relative;
+      padding-left: 20px;
+      font-family: $font-family-mono;
+      font-size: $font-size-sm;
+      color: $dark-text-color;
 
-  &__logo {
-    height: 50px;
-    width: 50px;
-  }
-
-  &__name {
-    font-weight: 500;
-    color: #333;
+      .skill__icon {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        color: $accent-color;
+        font-size: 0.9rem;
+      }
+    }
   }
 }
