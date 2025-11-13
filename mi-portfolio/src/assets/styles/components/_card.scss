@@ -1,30 +1,30 @@
 @use '../base/variables' as *;
 
 .card {
-  background-color: $white-color;
-  border: 1px solid $border-color;
+  background-color: $light-bg-color; // Usamos el color de fondo más claro
   border-radius: $border-radius;
-  padding: 1.5rem;
+  padding: 1.75rem; // Un poco más de padding
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  // Sombra sutil para dar profundidad en un fondo oscuro
+  box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
   transition: transform $transition-speed ease, box-shadow $transition-speed ease;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: $box-shadow;
+    transform: translateY(-7px);
+    box-shadow: 0 20px 30px -15px rgba(2,12,27,0.7);
   }
 
   &__title {
     font-size: 1.5rem;
     margin-bottom: 0.75rem;
-    color: $dark-color;
+    color: $white-color; // Título en blanco
   }
 
   &__description {
     flex-grow: 1;
     margin-bottom: 1.5rem;
-    color: $light-text-color;
+    color: $dark-text-color; // Texto secundario
     font-size: 1rem;
   }
 
@@ -32,23 +32,24 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
     padding: 0;
   }
 
   &__tag {
-    background-color: $light-gray;
-    color: $text-color;
+    background-color: rgba($accent-color, 0.1); // Fondo de acento con opacidad
+    color: $accent-color; // Texto de acento
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: 500;
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace; // Tipografía monoespaciada para tags
   }
 
   &__links {
     display: flex;
     gap: 1rem;
-    margin-top: auto; // Empuja los botones al final de la tarjeta
+    margin-top: auto;
   }
 }

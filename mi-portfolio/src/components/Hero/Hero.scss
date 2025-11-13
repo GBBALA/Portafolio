@@ -1,47 +1,50 @@
 @use '../../assets/styles/base/variables' as *;
 
-
 .hero {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  padding: $header-height 1.5rem 2rem;
-  background-color: $light-gray;
+  padding: 0 1.5rem;
 
   &__container {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 1000px;
+    text-align: left;
   }
 
-  &__title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem); // Tipografía fluida
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: $dark-color;
+  &__intro {
+    color: $accent-color;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: $font-size-base;
+    margin-bottom: 1.5rem;
   }
 
   &__name {
-    // Usamos un gradiente para un efecto más moderno
-    background: linear-gradient(90deg, $primary-color, $primary-color-dark);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 700;
+    color: $text-color;
+    margin: 0;
+    line-height: 1.1;
   }
 
-  &__subtitle {
+  &__tagline {
+    font-size: clamp(40px, 8vw, 70px);
+    font-weight: 700;
+    color: $dark-text-color;
+    margin: 0;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    color: $dark-text-color;
     font-size: $font-size-lg;
-    color: $light-text-color;
-    margin: 0 auto 2.5rem auto;
-    max-width: 700px;
-    font-weight: 400;
+    max-width: 550px;
+    margin-bottom: 3rem;
   }
 
-  &__links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+  &__button {
+    font-size: $font-size-base;
+    padding: 1.25rem 2.5rem;
   }
 }

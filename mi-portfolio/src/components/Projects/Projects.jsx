@@ -33,7 +33,13 @@ const Projects = () => {
   return (
     <section id="projects" className="projects">
       <div className="container">
-        <h2 className="projects__title">Proyectos Destacados</h2>
+        {/* Título actualizado: Usando section-title con contador '03.' */}
+        <h2 
+          className="section-title" 
+          style={{'--section-counter': "'03.'"}}
+        >
+          Proyectos Destacados
+        </h2>
         <div className="projects__grid">
           {projectData.map(project => (
             <div key={project.id} className="card">
@@ -45,8 +51,7 @@ const Projects = () => {
                 ))}
               </ul>
               <div className="card__links">
-                {/* 
-                  Lógica de renderizado condicional:
+                {/* Lógica de renderizado condicional:
                   El operador '&&' en JSX funciona como un "if" corto.
                   Si la condición (project.liveUrl && project.liveUrl !== '#') es verdadera,
                   el elemento a la derecha del '&&' será renderizado. Si es falsa, no se renderizará nada.

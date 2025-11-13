@@ -7,6 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(''); // Para mostrar mensajes de éxito o error
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,9 +44,14 @@ const Contact = () => {
   return (
     <section id="contact" className="contact">
       <div className="container">
-        <h2 className="contact__title">Contacto</h2>
+        {/* Título actualizado: Usando section-title con contador '04.' */}
+        <h2 
+          className="section-title" 
+          style={{'--section-counter': "'04.'"}}
+        >
+          Contacto
+        </h2>
         <form name="contact" onSubmit={handleSubmit} className="contact__form">
-          {/* ... (tus inputs y labels no cambian) ... */}
           <div className="form-group">
             <label htmlFor="name">Nombre</label>
             <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />

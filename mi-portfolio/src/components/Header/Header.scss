@@ -1,21 +1,19 @@
 @use '../../assets/styles/base/variables' as *;
 
-// src/components/Header/Header.scss
-
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   
-  // Efecto Glassmorphism
-  background-color: rgba(255, 255, 255, 0.8); // Fondo blanco con 80% de opacidad
-  backdrop-filter: blur(10px); // El desenfoque clave del fondo
-  -webkit-backdrop-filter: blur(10px); // Soporte para Safari
+  // Efecto Glassmorphism sobre fondo oscuro
+  background-color: rgba($bg-color, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Un borde sutil
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  z-index: 1000;;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+  z-index: 1000;
+  transition: top $transition-speed ease; // Para un efecto de ocultar/mostrar (futuro)
 
   &__container {
     max-width: $container-width;
@@ -31,14 +29,14 @@
     font-family: $font-family-headings;
     font-weight: 700;
     font-size: 1.75rem;
-    color: $dark-color;
+    color: $accent-color; // Logo con color de acento
     text-decoration: none;
   }
 
   &__nav-list {
     display: flex;
     list-style: none;
-    gap: 2.5rem; // Mayor separación
+    gap: 2.5rem;
     align-items: center;
     padding: 0;
   }
@@ -46,35 +44,17 @@
   &__nav-link {
     font-family: $font-family-headings;
     font-size: 1rem;
-    color: $light-text-color;
+    color: $text-color; // Texto principal
     font-weight: 500;
     text-decoration: none;
     transition: color $transition-speed ease;
-    position: relative;
-    padding-bottom: 0.5rem;
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: $primary-color;
-      transition: width $transition-speed ease;
-    }
-
+    
     &:hover {
-      color: $primary-color;
-
-      &::after {
-        width: 100%;
-      }
+      color: $accent-color;
     }
   }
 
-  .button { // Estilo específico para el botón dentro del nav
+  .button {
     font-size: 0.9rem;
     padding: 0.5rem 1.25rem;
   }

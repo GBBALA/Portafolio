@@ -1,0 +1,47 @@
+@use '../../assets/styles/base/variables' as *;
+
+.social-sidebar {
+  position: fixed;
+  bottom: 0;
+  left: 40px; // Posición a la izquierda
+  width: 40px;
+  z-index: 100;
+
+  // La línea vertical decorativa
+  &::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 90px;
+    margin: 0 auto;
+    background-color: $dark-text-color;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  a {
+    font-family: 'SF Mono', 'Fira Code', monospace; // Fuentes monoespaciadas para un look "tech"
+    font-size: 1.25rem;
+    color: $dark-text-color;
+    transition: all $transition-speed ease;
+
+    &:hover {
+      color: $accent-color;
+      transform: translateY(-3px);
+    }
+  }
+
+  // Ocultar en pantallas pequeñas
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

@@ -11,16 +11,30 @@
  * ===================================================================
  */
 
-// 1. MÓDULOS DE SASS
-// Todas las sentencias @use DEBEN ir primero, sin excepción.
+// 1. MÓDULOS DE SASS (@use)
+// Todas las sentencias @use DEBEN ir primero, sin excepción,
+// y no llevan punto y coma si no se utiliza 'as' para renombrar.
 @use 'base/variables';
-@use 'base/reset';
-@use 'base/typography';
+@use 'base/reset'; // Moviendo a la sección de bases para una mejor organización
+@use 'base/typography'; // Moviendo a la sección de bases
+@use 'layout/sections'; // Moviendo a la sección de layout
 @use 'layout/grid';
 @use 'components/button';
 @use 'components/card';
 
 // 2. DEPENDENCIAS EXTERNAS
-// Una vez que todos los módulos de Sass han sido cargados,
-// podemos añadir reglas de CSS estándar como @import.
+// Fuentes
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500&display=swap');
+
+// ---
+// 3. ESTILOS BASE (Base, Settings)
+// Normalmente, las reglas @use ya han cargado las bases,
+// pero si tuvieras código CSS directo de base, iría aquí.
+
+// ---
+// 4. ESTILOS DE LAYOUT (Layout)
+// Las bases para la estructura principal.
+
+// ---
+// 5. COMPONENTES GLOBALES (Components)
+// Estilos de UI específicos.

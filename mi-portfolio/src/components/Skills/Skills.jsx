@@ -32,7 +32,13 @@ const Skills = () => {
   return (
     <section id="skills" className="skills">
       <div className="skills__container">
-        <h2 className="skills__title">Tecnologías</h2>
+        {/* Título actualizado: Usando section-title con contador '02.' */}
+        <h2 
+          className="section-title" 
+          style={{'--section-counter': "'02.'"}}
+        >
+          Habilidades
+        </h2>
         <div className="skills__grid">
           {skillsData.map((skill) => (
             <div key={skill.name} className="skill-card">

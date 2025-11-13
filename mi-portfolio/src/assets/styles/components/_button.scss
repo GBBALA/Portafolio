@@ -14,30 +14,28 @@
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba($primary-color, 0.2);
   }
 
   // Modificador --primary (botón principal)
   &--primary {
-    background-color: $primary-color;
-    color: $white-color;
-    border-color: $primary-color;
+    background-color: $accent-color;
+    color: $bg-color; // Texto oscuro sobre fondo de acento
+    border-color: $accent-color;
 
     &:hover {
-      background-color: $primary-color-dark;
-      border-color: $primary-color-dark;
+      background-color: $accent-color-dark;
+      border-color: $accent-color-dark;
     }
   }
 
-  // Modificador --secondary (botón secundario)
+  // Modificador --secondary (botón secundario, estilo "fantasma")
   &--secondary {
     background-color: transparent;
-    color: $primary-color;
-    border-color: $primary-color;
+    color: $accent-color;
+    border-color: $accent-color;
 
     &:hover {
-      background-color: $primary-color;
-      color: $white-color;
+      background-color: rgba($accent-color, 0.1); // Relleno sutil al pasar el mouse
     }
   }
 }

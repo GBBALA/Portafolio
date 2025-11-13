@@ -7,7 +7,13 @@ const About = () => {
   return (
     <section id="about" className="about">
       <div className="about__container">
-        <h2 className="about__title">Sobre Mí</h2>
+        {/* Título modificado */}
+        <h2 
+          className="section-title" 
+          style={{'--section-counter': "'01.'"}}
+        >
+          Sobre Mí
+        </h2>
         <div className="about__content">
           <div className="about__image-container">
             <img src={profileImage} alt="Retrato profesional de [Tu Nombre]" className="about__image" />
@@ -20,8 +26,7 @@ const About = () => {
             <p>
               Mi enfoque se basa en la escritura de código limpio, la aplicación de patrones de diseño y la búsqueda constante de la mejor herramienta para cada desafío. Disfruto llevando un proyecto desde la concepción inicial hasta su despliegue final.
             </p>
-            {/* 
-              Crea un archivo PDF con tu CV y ponlo en la carpeta /public.
+            {/* Crea un archivo PDF con tu CV y ponlo en la carpeta /public.
               Por ejemplo: public/CV-TuNombre.pdf
             */}
             <a 
