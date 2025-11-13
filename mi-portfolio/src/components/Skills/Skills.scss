@@ -1,51 +1,112 @@
 @use '../../assets/styles/base/variables' as *;
 
 .skills {
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 100px 0;
-}
+  min-height: 400px; // Altura mínima para evitar saltos de layout
 
-.skill-category {
-  margin-bottom: 3rem;
+  &__container {
+    display: flex;
+    gap: 2rem;
 
-  &__title {
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-shrink: 0; // Evita que se encoja
+
+    // La línea de fondo de la barra de pestañas
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background-color: $light-bg-color;
+    }
+  }
+
+  &__tab {
     font-family: $font-family-mono;
-    font-size: 1.25rem;
-    color: $accent-color;
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
-    border-left: 2px solid $accent-color;
+    font-size: $font-size-sm;
+    color: $dark-text-color;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    white-space: nowrap;
+    border-left: 2px solid transparent; // Borde para el estado inactivo
+    transition: all $transition-speed ease;
+    margin-left: -2px; // Alinea con la línea de fondo
+
+    &:hover {
+      background-color: rgba($accent-color, 0.1);
+      color: $accent-color;
+    }
+
+    &--active {
+      color: $accent-color;
+      background-color: $light-bg-color;
+      border-left: 2px solid $accent-color;
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
   }
 
   &__grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1.5rem;
+    
+    // Transición de entrada y salida
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
   }
 }
 
 .skill-card {
   display: flex;
+  flex-direction: column; // Logo arriba, texto abajo
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
   background-color: $light-bg-color;
   border-radius: $border-radius;
   transition: transform $transition-speed ease;
+  min-height: 100px;
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
 
   &__logo {
-    height: 24px;
-    width: 24px;
+    height: 40px; // Logos más grandes
+    width: 40px;
   }
 
   &__name {
-    color: $text-color;
-    font-family: $font-family-mono;
+    color: $dark-text-color; // Texto más sutil
+    font-family: $font-family-body;
     font-size: $font-size-sm;
   }
 }

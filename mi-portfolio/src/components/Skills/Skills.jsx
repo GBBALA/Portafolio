@@ -1,8 +1,6 @@
-// src/components/Skills/Skills.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './Skills.scss';
 
-// Datos agrupados por categoría
 const skillsByCategory = [
   {
     category: 'Backend',
@@ -42,14 +40,34 @@ const skillsByCategory = [
 ];
 
 const Skills = () => {
+  // Estado para controlar la pestaña activa. Por defecto, la primera ('Backend').
+  const [activeTab, setActiveTab] = useState(skillsByCategory[0].category);
+
   return (
     <section id="skills" className="skills">
-      <h2 className="section-title" style={{'--section-counter': "''"}}>Tecnologías que Domino</h2>
-      <div className="skills__categories">
-        {skillsByCategory.map(({ category, skills }) => (
-          <div key={category} className="skill-category">
-            <h3 className="skill-category__title">{category}</h3>
-            <div className="skill-category__grid">
+      <h2 className="section-title" style={{ '--section-counter': "''" }}>Tecnologías</h2>
+      
+      <div className="skills__container">
+        {/* Lista de Pestañas / Navegación */}
+        <div className="skills__tabs">
+          {skillsByCategory.map(({ category }) => (
+            <button
+              key={category}
+              className={`skills__tab ${activeTab === category ? 'skills__tab--active' : ''}`}
+              onClick={() => setActiveTab(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Contenido de las Pestañas */}
+        <div className="skills__content">
+          {skillsByCategory.map(({ category, skills }) => (
+            <div
+              key={category}
+              className={`skills__grid ${activeTab === category ? 'skills__grid--active' : ''}`}
+            >
               {skills.map((skill) => (
                 <div key={skill.name} className="skill-card">
                   <img src={skill.logo} alt={`${skill.name} logo`} className="skill-card__logo" />
@@ -57,8 +75,8 @@ const Skills = () => {
                 </div>
               ))}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
