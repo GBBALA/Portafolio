@@ -1,58 +1,50 @@
 // src/components/ParticlesBackground/particles-config.js
 
 const particlesConfig = {
+  background: {
+    color: {
+      value: "transparent", // El color de fondo lo da el CSS del body
+    },
+  },
+  fpsLimit: 120,
   particles: {
+    color: {
+      value: "#ffffff", // Estrellas blancas
+    },
+    move: {
+      direction: "none",
+      enable: true,
+      outModes: {
+        default: "out",
+      },
+      random: true,
+      speed: 0.3, // Movimiento muy lento y sutil
+      straight: false,
+    },
     number: {
-      value: 60, // Menos partículas para un look más limpio
       density: {
         enable: true,
-        value_area: 800,
+        area: 800,
       },
-    },
-    color: {
-      value: '#cccccc', // Color grisáceo para las partículas
-    },
-    shape: {
-      type: 'circle',
+      value: 100, // Cantidad de estrellas
     },
     opacity: {
       value: 0.5,
-      random: true,
+      animation: { // Animación de parpadeo
+        enable: true,
+        minimumValue: 0.1,
+        speed: 1,
+        sync: false,
+      }
+    },
+    shape: {
+      type: "circle",
     },
     size: {
-      value: 2,
-      random: true,
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: '#cccccc', // Color de las líneas
-      opacity: 0.4,
-      width: 1,
-    },
-    move: {
-      enable: true,
-      speed: 1, // Movimiento lento
-      direction: 'none',
-      random: false,
-      straight: false,
-      out_mode: 'out',
-      bounce: false,
+      value: { min: 1, max: 2.5 }, // Estrellas de diferentes tamaños pequeños
     },
   },
-  interactivity: {
-    detect_on: 'canvas',
-    events: {
-      onhover: {
-        enable: false, // Desactivado para no distraer
-      },
-      onclick: {
-        enable: false, // Desactivado
-      },
-      resize: true,
-    },
-  },
-  retina_detect: true,
+  detectRetina: true,
 };
 
 export default particlesConfig;

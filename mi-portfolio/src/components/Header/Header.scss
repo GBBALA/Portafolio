@@ -2,69 +2,68 @@
 
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  // Efecto Glassmorphism sobre fondo oscuro
-  background-color: rgba($bg-color, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+  top: 20px; // Separación desde la parte superior para que flote
+  left: 50%;
+  transform: translateX(-50%); // Truco para centrar horizontalmente un elemento fijo
+  width: auto; // El ancho se ajusta al contenido
+  max-width: 90%;
   z-index: 1000;
-  // Esta línea aplica la transición suave para el efecto de scroll
-  transition: top $transition-speed ease; 
+  transition: top $transition-speed ease; // Transición para el efecto de ocultar/mostrar
+  
+  // -- ESTILO CÁPSULA GLASSMORPHISM --
+  background-color: rgba($light-bg-color, 0.75); // Fondo oscuro semitransparente
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Soporte para Safari
+  border: 1px solid rgba($white-color, 0.1);
+  border-radius: 50px; // Bordes completamente redondos
+  padding: 0.75rem 2rem;
+  box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
 
-  &__container {
-    max-width: $container-width;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: $header-height;
+  // Clase para ocultar el header al hacer scroll hacia abajo
+  &--hidden {
+    top: -100px; // Lo mueve fuera de la pantalla
   }
 
-  &__logo {
-    font-family: $font-family-headings;
-    font-weight: 700;
-    font-size: 1.75rem;
-    color: $accent-color; // Logo con color de acento
-    text-decoration: none;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Centramos el contenido del nav
+    height: auto;
   }
 
   &__nav-list {
     display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
+    gap: 2rem;
+    margin: 0;
     padding: 0;
+    list-style: none;
   }
 
   &__nav-link {
-    font-family: $font-family-headings;
-    font-size: 1rem;
-    color: $text-color; // Texto principal
-    font-weight: 500;
+    font-family: $font-family-mono;
+    font-size: 0.9rem;
+    color: $text-color;
     text-decoration: none;
     transition: color $transition-speed ease;
+    padding: 0.5rem 0;
 
     &:hover {
       color: $accent-color;
     }
   }
 
-  .button {
-    font-size: 0.9rem;
-    padding: 0.5rem 1.25rem;
-  }
-  
-  // -------------------------------------------------------------------
-  // AÑADIDO: Estilo para ocultar el header cuando se hace scroll hacia abajo
-  // -------------------------------------------------------------------
-  &--hidden {
-    // Mueve el header fuera de la pantalla por la altura definida
-    top: -($header-height); 
+  // Media Query para adaptar la cápsula a pantallas más pequeñas
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 0.5rem 1rem;
+    top: 10px;
+    
+    &__nav-list {
+      gap: 1.5rem;
+    }
+
+    &__nav-link {
+      font-size: 0.8rem;
+    }
   }
 }

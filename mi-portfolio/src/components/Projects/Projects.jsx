@@ -48,7 +48,7 @@ const Projects = () => {
   return (
     <section id="projects" className="projects">
       {/* Usando un estilo para el contador de sección basado en CSS */}
-      <h2 className="section-title" style={{'--section-counter': "'02.'"}}>Proyectos Destacados</h2> 
+      <h2 className="section-title" style={{'--section-counter': "''"}}>Proyectos Destacados</h2> 
       <div className="projects__list">
         {projectData.map((project, index) => (
           // Alternar la clase project--reversed para cambiar el orden en cada proyecto

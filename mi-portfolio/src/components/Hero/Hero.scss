@@ -1,50 +1,50 @@
 @use '../../assets/styles/base/variables' as *;
 
 .hero {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  text-align: center;
   padding: 0 1.5rem;
+  position: relative;
+  z-index: 1; // Para estar por encima del fondo de partículas
 
   &__container {
-    max-width: 1000px;
-    text-align: left;
+    max-width: 900px;
   }
 
-  &__intro {
+  &__greeting {
     color: $accent-color;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: $font-size-base;
+    font-family: $font-family-mono;
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
   }
 
-  &__name {
-    font-size: clamp(40px, 8vw, 80px);
+  &__typewriter {
+    font-family: $font-family-headings;
+    font-size: clamp(2.5rem, 6vw, 4.5rem); // Tamaño de fuente fluido
     font-weight: 700;
-    color: $text-color;
-    margin: 0;
-    line-height: 1.1;
-  }
+    color: $white-color;
+    margin-bottom: 1.5rem;
+    min-height: 1.3em; // Evita que la página salte mientras se escribe el texto
 
-  &__tagline {
-    font-size: clamp(40px, 8vw, 70px);
-    font-weight: 700;
-    color: $dark-text-color;
-    margin: 0;
-    line-height: 1.1;
-    margin-bottom: 2rem;
+    .Typewriter__cursor {
+      color: $accent-color; // Color del cursor que parpadea
+    }
   }
 
   &__description {
-    color: $dark-text-color;
     font-size: $font-size-lg;
-    max-width: 550px;
-    margin-bottom: 3rem;
+    color: $dark-text-color;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
   }
 
-  &__button {
-    font-size: $font-size-base;
-    padding: 1.25rem 2.5rem;
+  &__actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap; // Asegura que los botones se ajusten en pantallas pequeñas
   }
 }

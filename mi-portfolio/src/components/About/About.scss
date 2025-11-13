@@ -70,8 +70,6 @@
     position: relative;
     width: 100%;
     border-radius: $border-radius;
-    mix-blend-mode: multiply;
-    filter: grayscale(100%) contrast(1);
     transition: all $transition-speed ease;
 
     &:hover {

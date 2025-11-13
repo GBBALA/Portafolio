@@ -1,20 +1,39 @@
 // src/components/Hero/Hero.jsx
+
 import React from 'react';
+import Typewriter from 'typewriter-effect';
 import './Hero.scss';
 
 const Hero = () => {
   return (
     <section id="hero" className="hero">
       <div className="hero__container">
-        <p className="hero__intro">Hola, mi nombre es</p>
-        <h1 className="hero__name">Javier Quiroga.</h1>
-        <h2 className="hero__tagline">Construyo aplicaciones para la web.</h2>
+        <p className="hero__greeting">Hola, mi nombre es Javier.</p>
+        
+        <h1 className="hero__typewriter">
+          <Typewriter
+            options={{
+              strings: [
+                'Desarrollador Java Full Stack.',
+                'Especialista en React y Spring Boot.',
+                'Creador de Soluciones Web.',
+              ],
+              autoStart: true,
+              loop: true,
+              deleteSpeed: 50,
+              delay: 75,
+            }}
+          />
+        </h1>
+
         <p className="hero__description">
-          Soy un desarrollador Full-Stack con base en Argentina, especializado en crear soluciones web robustas y escalables, desde APIs de alto rendimiento en Java hasta interfaces de usuario dinámicas con React.
+          Técnico Universitario en Programación con enfoque en desarrollo de software (backend y frontend) y mantenimiento de hardware computacional
         </p>
-        <a href="#contact" className="button button--primary hero__button">
-          ¡Contactame!
-        </a>
+        
+        <div className="hero__actions">
+          <a href="#contact" className="button button--primary">Contáctame</a>
+          <a href="/Javier-Quiroga-CV.pdf" target="_blank" rel="noopener noreferrer" className="button button--secondary">Descargar CV</a>
+        </div>
       </div>
     </section>
   );

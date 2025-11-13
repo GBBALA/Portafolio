@@ -6,6 +6,7 @@ import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import SocialSidebar from './components/SocialSidebar/SocialSidebar.jsx';
 import FadeInWrapper from './components/FadeInWrapper/FadeInWrapper.jsx';
+import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground.jsx';
 
 // Importación de componentes de Sección
 import Hero from './components/Hero/Hero.jsx';
@@ -17,6 +18,7 @@ import Contact from './components/Contact/Contact.jsx';
 function App() {
   return (
     <div className="app-layout"> 
+      <ParticlesBackground />
       <SocialSidebar />
       <Header />
 

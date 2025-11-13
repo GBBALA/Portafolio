@@ -1,19 +1,16 @@
+// src/components/Header/Header.jsx
+
 import React from 'react';
-import './Header.scss'; // Importamos los estilos del componente
-import { useScrollDirection } from '../../hooks/useScrollDirection'; // Importamos el hook
+import './Header.scss';
+import { useScrollDirection } from '../../hooks/useScrollDirection';
 
 const Header = () => {
-  // 1. Llamamos al hook para obtener la dirección del scroll
   const scrollDirection = useScrollDirection();
 
-  // 2. Usamos la variable scrollDirection para aplicar la clase condicional
-  const headerClass = `header ${scrollDirection === "down" ? "header--hidden" : ""}`;
-
   return (
-    // 3. Aplicamos la clase condicional al elemento <header>
-    <header className={headerClass}>
+    // La clase 'header--hidden' seguirá funcionando para ocultar/mostrar al hacer scroll
+    <header className={`header ${scrollDirection === 'down' ? 'header--hidden' : ''}`}>
       <div className="header__container">
-        <a href="#hero" className="header__logo">[Javier Quiroga]</a> {/* Logo o nombre del portafolio */}
         <nav className="header__nav">
           <ul className="header__nav-list">
             <li className="header__nav-item">
@@ -23,7 +20,10 @@ const Header = () => {
               <a href="#projects" className="header__nav-link">Proyectos</a>
             </li>
             <li className="header__nav-item">
-              <a href="#contact" className="header__nav-link button button--primary">Contacto</a>
+              <a href="#skills" className="header__nav-link">Habilidades</a>
+            </li>
+            <li className="header__nav-item">
+              <a href="#contact" className="header__nav-link">Contacto</a>
             </li>
           </ul>
         </nav>

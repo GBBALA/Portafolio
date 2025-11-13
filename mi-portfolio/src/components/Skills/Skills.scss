@@ -1,41 +1,51 @@
-// src/components/Skills/Skills.scss
 @use '../../assets/styles/base/variables' as *;
 
 .skills {
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 100px 0;
+}
 
-  &__intro {
-    color: $dark-text-color;
-    margin-bottom: 2rem;
+.skill-category {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-family: $font-family-mono;
+    font-size: 1.25rem;
+    color: $accent-color;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid $accent-color;
   }
 
-  &__list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 300px));
-    gap: 10px 20px;
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: $light-bg-color;
+  border-radius: $border-radius;
+  transition: transform $transition-speed ease;
 
-    li {
-      position: relative;
-      padding-left: 20px;
-      font-family: $font-family-mono;
-      font-size: $font-size-sm;
-      color: $dark-text-color;
+  &:hover {
+    transform: translateY(-3px);
+  }
 
-      .skill__icon {
-        position: absolute;
-        left: 0;
-        top: 4px;
-        color: $accent-color;
-        font-size: 0.9rem;
-      }
-    }
+  &__logo {
+    height: 24px;
+    width: 24px;
+  }
+
+  &__name {
+    color: $text-color;
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
   }
 }

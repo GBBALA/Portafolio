@@ -7,7 +7,7 @@ const About = () => {
   return (
     <section id="about" className="about">
       {/* Usamos la clase y el contador CSS para el título "01. Sobre Mí" */}
-      <h2 className="section-title" style={{'--section-counter': "'01.'"}}>Sobre Mí</h2>
+      <h2 className="section-title" style={{'--section-counter': "''"}}>Sobre Mí</h2>
       
       <div className="about__content">
         <div className="about__text">
