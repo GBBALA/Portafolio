@@ -1,7 +1,6 @@
 @use '../../assets/styles/base/variables' as *;
 
 .projects {
-  
   padding: 100px 0;
 }
 
@@ -12,7 +11,6 @@
   gap: 10px;
   margin-bottom: 100px;
 
-  // Layout por defecto (imagen a la izquierda)
   &__image-container {
     grid-column: 1 / 8;
     grid-row: 1 / 2;
@@ -22,7 +20,7 @@
     @media (max-width: 768px) {
       grid-column: 1 / -1;
       height: 100%;
-      opacity: 0.25;
+      opacity: 0.15; // Un poco más sutil
     }
   }
 
@@ -34,12 +32,11 @@
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
-      padding: 40px;
+      padding: 20px;
       text-align: left;
     }
   }
 
-  // Layout alternado (imagen a la derecha)
   &--reversed {
     .project__image-container {
       grid-column: 6 / -1;
@@ -53,7 +50,6 @@
     }
   }
 
-  // Estilos de los elementos internos
   &__image {
     width: 100%;
     display: block;
@@ -86,16 +82,44 @@
     box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
   }
 
-  &__tags {
+  // --- NUEVO: Estilos para las Tecnologías ---
+  // REEMPLAZA el bloque .project__tags con todo lo siguiente
+  &__technologies {
     list-style: none;
     padding: 0;
     margin: 1.5rem 0 1rem;
     display: flex;
-    gap: 1rem;
-    justify-content: inherit;
+    flex-wrap: wrap; // Permite que los items pasen a la siguiente línea
+    gap: 0.75rem;
+    // Hereda la alineación (left/right) del contenedor padre .project__content
+    justify-content: inherit; 
+  }
+
+  .tech-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #2a2a2e;
+    color: #e0e0e0;
+    padding: 0.3rem 0.75rem;
+    border-radius: 1rem;
     font-family: $font-family-mono;
-    color: $dark-text-color;
     font-size: $font-size-sm;
+    font-weight: 500;
+    border: 1px solid #444;
+    transition: all 0.2s ease-in-out;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+      color: var(--tech-color, $accent-color);
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--tech-color, $accent-color);
+    }
   }
 
   &__links {

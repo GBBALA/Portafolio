@@ -1,6 +1,6 @@
-/* --- src/components/Contact/Contact.scss (Dark Mode Theme - CORREGIDO) --- */
+/* --- src/components/Contact/Contact.scss (Dark Mode Theme - COMPLETO) --- */
 
-// --- Variables de Diseño (Inspirado en Referencias) ---
+// --- Variables de Diseño ---
 $primary-accent: #e91e63;
 $background-dark: #121212;
 $form-bg: #1e1e1e;
@@ -10,19 +10,17 @@ $border-color: #333333;
 $border-focus: $primary-accent;
 $base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $base-border-radius: 6px;
-
-// AÑADIDO: Variables de estado que faltaban.
-$success-color: #2ecc71;      // Verde para mensajes de éxito.
-$error-color: #e74c3c;        // Rojo para mensajes de error.
-
+$success-color: #2ecc71;
+$error-color: #e74c3c;
 
 // --- Contenedor Principal ---
 .contact-section {
   background-color: $background-dark;
   font-family: $base-font-family;
   padding: 100px 20px;
+  // MODIFICADO: Ahora es un contenedor flex vertical
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -33,7 +31,6 @@ $error-color: #e74c3c;        // Rojo para mensajes de error.
 
 // --- Estilos del Formulario ---
 .contact-form {
-  
   &__title {
     font-size: 3.5rem;
     font-weight: 800;
@@ -127,7 +124,7 @@ $error-color: #e74c3c;        // Rojo para mensajes de error.
       width: 100%;
       height: 2px;
       background-color: $text-color-secondary;
-      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
     
     &:hover::after {
@@ -179,6 +176,38 @@ $error-color: #e74c3c;        // Rojo para mensajes de error.
     }
     &__subtitle {
       font-size: 1rem;
+    }
+  }
+}
+
+// --- NUEVO: Estilos para la sección de Redes Sociales ---
+.social-links {
+  text-align: center;
+  margin-top: 5rem;
+  padding-bottom: 2rem;
+
+  &__title {
+    color: $text-color-secondary;
+    font-family: $base-font-family;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+
+    a {
+      color: $text-color-secondary;
+      font-size: 2.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: $primary-accent;
+        transform: scale(1.1) translateY(-3px);
+      }
     }
   }
 }

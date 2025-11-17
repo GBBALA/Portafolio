@@ -1,17 +1,20 @@
 @use '../../assets/styles/base/variables' as *;
 
 .skills {
-  max-width: 700px;
-  margin: 0 auto;
+  // --- CORRECCIÓN DE LAYOUT ---
+  // ELIMINADO: max-width: 700px; <-- Causa principal del problema.
+  // ELIMINADO: margin: 0 auto;   <-- Redundante y conflictivo.
+  // Ahora la sección ocupará el ancho completo del layout principal (1100px).
   padding: 100px 0;
-  min-height: 400px; // Altura mínima para evitar saltos de layout
+  min-height: 500px; // Aumentamos la altura mínima para darle más espacio.
 
   &__container {
     display: flex;
-    gap: 2rem;
+    gap: 3rem; // Aumentamos el espacio entre las pestañas y el contenido.
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) { // Un punto de quiebre más adecuado
       flex-direction: column;
+      gap: 2rem;
     }
   }
 
@@ -19,9 +22,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    flex-shrink: 0; // Evita que se encoja
+    flex-shrink: 0;
 
-    // La línea de fondo de la barra de pestañas
     &::before {
       content: '';
       position: absolute;
@@ -35,17 +37,17 @@
 
   &__tab {
     font-family: $font-family-mono;
-    font-size: $font-size-sm;
+    font-size: $font-size-base; // Aumentamos el tamaño de fuente para mejor legibilidad.
     color: $dark-text-color;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.75rem; // Más padding para un área de clic más grande.
     text-align: left;
     white-space: nowrap;
-    border-left: 2px solid transparent; // Borde para el estado inactivo
+    border-left: 2px solid transparent;
     transition: all $transition-speed ease;
-    margin-left: -2px; // Alinea con la línea de fondo
+    margin-left: -2px;
 
     &:hover {
       background-color: rgba($accent-color, 0.1);
@@ -66,10 +68,10 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 1.5rem;
+    // CORRECCIÓN DE TAMAÑO: Hacemos las columnas un poco más grandes.
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 2rem; // Más espacio entre las tarjetas.
     
-    // Transición de entrada y salida
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -85,28 +87,30 @@
 
 .skill-card {
   display: flex;
-  flex-direction: column; // Logo arriba, texto abajo
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 1.25rem; // Un poco más de espacio interno.
+  padding: 1.5rem 1rem; // Más padding vertical.
   background-color: $light-bg-color;
   border-radius: $border-radius;
   transition: transform $transition-speed ease;
-  min-height: 100px;
+  min-height: 120px; // Tarjetas un poco más altas.
 
   &:hover {
     transform: translateY(-5px);
   }
 
   &__logo {
-    height: 40px; // Logos más grandes
-    width: 40px;
+    // CORRECCIÓN DE TAMAÑO: Logos más grandes para mayor impacto visual.
+    height: 50px; 
+    width: 50px;
   }
 
   &__name {
-    color: $dark-text-color; // Texto más sutil
+    color: $text-color; // Un color un poco más brillante para el texto.
     font-family: $font-family-body;
-    font-size: $font-size-sm;
+    // CORRECCIÓN DE TAMAÑO: Texto más grande y legible.
+    font-size: $font-size-base; 
   }
 }

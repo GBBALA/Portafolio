@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import './Contact.scss'; // Asegúrate de que la importación del SCSS es correcta.
+import './Contact.scss';
+import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
-  // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
 
-  // Estado para gestionar el proceso de envío
   const [status, setStatus] = useState({
     submitted: false,
     submitting: false,
     info: { error: false, msg: null },
   });
 
-  // Handler para actualizar el estado cuando el usuario escribe
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -25,14 +23,12 @@ const Contact = () => {
     }));
   };
 
-  // Handler para gestionar la respuesta del servidor
   const handleServerResponse = (ok, msg) => {
     setStatus({
       submitted: ok,
       submitting: false,
       info: { error: !ok, msg: msg },
     });
-    // Si el envío fue exitoso, resetea el formulario
     if (ok) {
       setFormData({
         name: '',
@@ -42,7 +38,6 @@ const Contact = () => {
     }
   };
 
-  // Handler para el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status.submitting) return;
@@ -50,10 +45,7 @@ const Contact = () => {
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
 
     try {
-      // La URL debe apuntar a tu endpoint del backend que usa Resend.
-      // Si tu backend está en el mismo proyecto (ej. en una carpeta /api), esta ruta relativa funciona.
-      // Si está en otro dominio, deberás usar la URL completa y configurar CORS.
-      const res = await fetch('/api/send', {
+      const res = await fetch('/api/send', { // Asegúrate que este endpoint es correcto
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,9 +53,8 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      // Asumimos que tu API devuelve un mensaje en formato de texto.
       const responseMessage = await res.text();
-      handleServerResponse(res.ok, responseMessage);
+      handleServerResponse(res.ok, responseMessage || (res.ok ? 'Mensaje enviado con éxito.' : 'Ocurrió un error.'));
     } catch (error) {
       console.error('Error submitting form:', error);
       handleServerResponse(false, 'Ha ocurrido un error al enviar el mensaje.');
@@ -89,7 +80,6 @@ const Contact = () => {
               onChange={handleChange}
               value={formData.name}
               required
-              aria-required="true"
             />
           </div>
 
@@ -103,7 +93,6 @@ const Contact = () => {
               onChange={handleChange}
               value={formData.email}
               required
-              aria-required="true"
             />
           </div>
 
@@ -116,26 +105,49 @@ const Contact = () => {
               onChange={handleChange}
               value={formData.message}
               required
-              aria-required="true"
               rows="5"
             ></textarea>
           </div>
 
           <div className="contact-form__footer">
             <button type="submit" className="contact-form__button" disabled={status.submitting}>
-              {status.submitting ? 'Enviando...' : 'Enviar Mensaje'}
+              {status.submitting ? 'Enviando...' : 'Enviar'}
             </button>
           </div>
 
           {status.info.msg && (
             <div
               className={`contact-form__status-message ${status.info.error ? 'contact-form__status-message--error' : 'contact-form__status-message--success'}`}
-              aria-live="assertive"
             >
               {status.info.msg}
             </div>
           )}
         </form>
+      </div>
+
+      <div className="social-links">
+        <h3 className="social-links__title">Conecta conmigo</h3>
+        <div className="social-links__icons">
+          {/* Enlace a GitHub (ya estaba correcto) */}
+          <a href="https://github.com/GBBALA" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de GitHub">
+            <FaGithub />
+          </a>
+          
+          {/* Enlace a LinkedIn (ACTUALIZADO) */}
+          <a href="https://www.linkedin.com/in/javier-quiroga-045940379/" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de LinkedIn">
+            <FaLinkedin />
+          </a>
+          
+          {/* Enlace a Instagram (ACTUALIZADO) */}
+          <a href="https://www.instagram.com/javiidq/" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de Instagram">
+            <FaInstagram />
+          </a>
+          
+          {/* Enlace a Facebook (ACTUALIZADO) */}
+          <a href="https://www.facebook.com/profile.php?id=100008261436576&locale=es_LA" target="_blank" rel="noopener noreferrer" aria-label="Visita mi perfil de Facebook">
+            <FaFacebook />
+          </a>
+        </div>
       </div>
     </section>
   );

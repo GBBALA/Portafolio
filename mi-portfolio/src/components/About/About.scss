@@ -1,9 +1,9 @@
 @use '../../assets/styles/base/variables' as *;
 
 .about {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 100px 0;
+  // ELIMINADO: max-width: 900px; <-- Esto impedía el centrado global.
+  // ELIMINADO: margin: 0 auto;   <-- Esto también impedía el centrado global.
+  padding: 100px 0; // Se mantiene el padding vertical para dar espacio a la sección.
 
   &__content {
     display: grid;
