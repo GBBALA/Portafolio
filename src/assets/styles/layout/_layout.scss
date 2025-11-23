@@ -10,11 +10,13 @@ $header-height: 80px;
   grid-template-columns: 40px 1fr 40px;
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden; /* IMPORTANTE: Corta cualquier desbordamiento */
+  overflow-x: hidden;
 
   // --- RESPONSIVE FIX ---
-  @media (max-width: 768px) {
-    display: block; /* Desactivamos Grid, usamos bloque normal */
+  @media (max-width: 900px) { // Subimos a 900px para tablets también
+    display: block !important; // FORZAMOS BLOQUE
+    width: 100% !important;
+    max-width: 100vw !important;
     position: relative;
   }
 }

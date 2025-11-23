@@ -4,11 +4,20 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  // Usamos clamp, pero aseguramos un mínimo pequeño para móvil
+  font-size: clamp(1.2rem, 5vw, 2rem); 
   margin-bottom: 2.5rem;
   width: 100%;
-  white-space: nowrap;
+  
+  // --- CORRECCIÓN CRÍTICA ---
   color: $white-color;
+  white-space: nowrap; /* En escritorio se ve bien en una línea */
+
+  /* EN MÓVIL: Permitimos que el texto baje si es necesario */
+  @media (max-width: 768px) {
+    white-space: normal; 
+    flex-wrap: wrap; // Permite que la línea decorativa baje si no cabe
+  }
 
   &::before {
     content: var(--section-counter);
@@ -22,9 +31,17 @@
     content: '';
     display: block;
     width: 100%;
-    max-width: 300px;
+    // En móvil, la línea debe ser más corta para no empujar el ancho
+    max-width: 300px; 
     height: 1px;
     background-color: $light-bg-color;
-    margin-left: 1.5rem;
+    // En móvil, reducimos el margen
+    margin-left: 1rem;
+    
+    @media (max-width: 768px) {
+      max-width: 100%; // Que ocupe lo que sobre, no un fijo
+      min-width: 50px; // Al menos un pedacito de línea
+      flex-grow: 1;
+    }
   }
 }
