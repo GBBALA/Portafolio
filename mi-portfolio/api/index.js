@@ -1,5 +1,5 @@
 // 1. Cargar las variables de entorno desde el archivo .env
-require('dotenv').config();
+//require('dotenv').config();
 
 // 2. Importar las dependencias necesarias
 const express = require('express');
