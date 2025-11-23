@@ -2,33 +2,51 @@
 
 .header {
   position: fixed;
-  top: 20px; // Separación desde la parte superior para que flote
+  top: 20px;
   left: 50%;
-  transform: translateX(-50%); // Truco para centrar horizontalmente un elemento fijo
-  width: auto; // El ancho se ajusta al contenido
-  max-width: 90%;
+  transform: translateX(-50%);
+  width: auto; 
+  max-width: 90%; // En escritorio está bien
   z-index: 1000;
-  transition: top $transition-speed ease; // Transición para el efecto de ocultar/mostrar
+  transition: top $transition-speed ease;
   
-  // -- ESTILO CÁPSULA GLASSMORPHISM --
-  background-color: rgba($light-bg-color, 0.75); // Fondo oscuro semitransparente
+  // Estilo Cápsula
+  background-color: rgba($light-bg-color, 0.85); // Un poco más opaco para legibilidad
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); // Soporte para Safari
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba($white-color, 0.1);
-  border-radius: 50px; // Bordes completamente redondos
+  border-radius: 50px;
   padding: 0.75rem 2rem;
   box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
 
-  // Clase para ocultar el header al hacer scroll hacia abajo
+  // --- AJUSTE MÓVIL CRÍTICO ---
+  @media (max-width: 768px) {
+    width: 95%;      // Ocupar casi todo el ancho
+    max-width: 100%; // Permitir crecer
+    padding: 0.5rem 1rem; // Reducir el padding interno drásticamente
+    border-radius: 12px;  // Menos redondo para ganar espacio lateral (opcional)
+    bottom: 20px;    // Mover abajo (opcional, pero ayuda UX)
+    top: auto;       // Anular top
+  }
+
   &--hidden {
-    top: -100px; // Lo mueve fuera de la pantalla
+    top: -100px;
   }
 
   &__container {
     display: flex;
     align-items: center;
-    justify-content: center; // Centramos el contenido del nav
+    justify-content: center;
     height: auto;
+    
+    // Si el contenido es mucho, permitimos scroll horizontal suave dentro de la cápsula
+    @media (max-width: 768px) {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      // Ocultar barra de scroll fea
+      &::-webkit-scrollbar { display: none; } 
+    }
   }
 
   &__nav-list {
@@ -37,6 +55,11 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
+    // En móvil, reducimos el espacio entre links
+    @media (max-width: 768px) {
+      gap: 1rem; 
+    }
   }
 
   &__nav-link {
@@ -46,33 +69,32 @@
     text-decoration: none;
     transition: color $transition-speed ease;
     padding: 0.5rem 0;
+    white-space: nowrap; // Mantenemos en una línea dentro del scroll
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem; // Letra un pelín más chica
+    }
 
     &:hover {
       color: $accent-color;
     }
   }
 
-  // Media Query para adaptar la cápsula a pantallas más pequeñas
-// --- Media Query para Desktop ---
-@media (min-width: 768px) {
-  &__toggle {
-    display: none;
+  // Desktop adjustments
+  @media (min-width: 768px) {
+    &__toggle { display: none; }
+    &__menu {
+      position: static;
+      flex-direction: row;
+      height: auto;
+      width: auto;
+      background-color: transparent;
+      gap: 2.5rem;
+      transition: none;
+    }
+    &__link {
+      font-size: 1rem;
+      white-space: nowrap;
+    }
   }
-
-  &__menu {
-    position: static;
-    flex-direction: row;
-    height: auto;
-    width: auto;
-    background-color: transparent;
-    gap: 2.5rem;
-    transition: none;
-  }
-    
-  &__link {
-    font-size: 1rem;
-    // --- AÑADIDO ---
-    white-space: nowrap; // Evita que el texto del enlace se rompa en dos líneas
-  }
-}
 }

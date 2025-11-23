@@ -8,10 +8,11 @@
   text-align: center;
   padding: 0 1.5rem;
   position: relative;
-  z-index: 1; // Para estar por encima del fondo de partículas
+  z-index: 1;
 
   &__container {
     max-width: 900px;
+    width: 100%; // Asegurar que ocupe el ancho disponible
   }
 
   &__greeting {
@@ -23,14 +24,21 @@
 
   &__typewriter {
     font-family: $font-family-headings;
-    font-size: clamp(2.5rem, 6vw, 4.5rem); // Tamaño de fuente fluido
+    // Reducimos un poco el mínimo del clamp para móviles muy pequeños
+    font-size: clamp(2rem, 8vw, 4.5rem); 
     font-weight: 700;
     color: $white-color;
     margin-bottom: 1.5rem;
-    min-height: 1.3em; // Evita que la página salte mientras se escribe el texto
+    min-height: 1.3em;
+    
+    // --- SOLUCIÓN: Permitir que el texto se parta ---
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    white-space: normal; // Fundamental
+    line-height: 1.2;
 
     .Typewriter__cursor {
-      color: $accent-color; // Color del cursor que parpadea
+      color: $accent-color;
     }
   }
 
@@ -39,32 +47,32 @@
     color: $dark-text-color;
     max-width: 600px;
     margin: 0 auto 3rem auto;
+    
+    // Ajuste móvil
+    @media (max-width: 768px) {
+      font-size: 1rem; // Texto más legible
+      padding: 0 10px;
+    }
   }
 
   &__actions {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    flex-wrap: wrap; // Asegura que los botones se ajusten en pantallas pequeñas
+    flex-wrap: wrap; // Los botones bajarán si no caben
   }
 
   // --- RESPONSIVE DESIGN (Mobile) ---
   @media (max-width: 576px) {
-    // Ajustes al contenedor principal
-    padding: 0 20px;
+    padding: 80px 20px 0; // Dar espacio al header si está arriba
 
-    // Ajustes al texto tipo máquina de escribir
-    &__typewriter {
-      font-size: clamp(2.2rem, 10vw, 3rem);
-    }
-
-    // Ajustes a la imagen (Bloque Modificado Solicitado)
     &__image-container {
+      margin-top: 2rem;
       .hero__image {
-        width: 240px;  // Reducimos el tamaño
-        height: 240px; // Reducimos el tamaño
-        // Sugerencia Senior: Asegura que la imagen mantenga el ratio si cambias dimensiones
+        width: 180px;  // Un poco más pequeño para asegurar que entre
+        height: 180px; 
         object-fit: cover; 
+        border-radius: 50%; // Opcional: hacerlo redondo se ve bien en móvil
       }
     }
   }
