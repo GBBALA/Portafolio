@@ -2,7 +2,7 @@
    SRC/ASSETS/STYLES/MAIN.SCSS
    ========================================= */
 
-// 1. MÓDULOS (Siempre primero)
+// 1. MÓDULOS DE BASE (Rutas relativas dentro de assets/styles)
 @use 'base/variables';
 @use 'base/reset';
 @use 'base/typography';
@@ -11,9 +11,9 @@
 @use 'layout/layout';
 @use 'components/button';
 @use 'components/card';
-// Importa tus sidebars aquí para asegurar que carguen
-@use 'components/SocialSidebar/SocialSidebar'; 
-// @use 'components/EmailSidebar/EmailSidebar'; // Descomenta si lo usas
+
+// --- ELIMINAMOS LOS IMPORTS DE SIDEBARS QUE CAUSABAN EL ERROR ---
+// React ya carga estos estilos cuando importas el componente .jsx
 
 // 2. FUENTES
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500&display=swap');
@@ -27,7 +27,7 @@
 html, body {
   width: 100%;
   max-width: 100vw;       
-  overflow-x: hidden;     /* CORTA cualquier cosa que se salga */
+  overflow-x: hidden;     
   margin: 0;
   padding: 0;
   position: relative;
@@ -39,19 +39,19 @@ html, body {
   overflow-x: hidden;
 }
 
-/* B. Controlar las PARTÍCULAS (Culpable habitual) */
+/* B. Controlar las PARTÍCULAS */
 #tsparticles, canvas {
   max-width: 100vw !important;
   width: 100% !important;
   height: 100% !important;
-  position: fixed !important; /* Fijo al fondo */
+  position: fixed !important; 
   top: 0;
   left: 0;
-  z-index: -1 !important; /* Siempre atrás */
-  pointer-events: none; /* Que no interfiera con clicks */
+  z-index: -1 !important; 
+  pointer-events: none; 
 }
 
-/* C. Evitar que imágenes o SVGs rompan el layout */
+/* C. Evitar que imágenes rompan el layout */
 img, svg, video, iframe {
   max-width: 100%;
   height: auto;
@@ -63,20 +63,17 @@ img, svg, video, iframe {
    ========================================= */
 @media (max-width: 900px) {
   
-  /* Desactivar Grid principal */
   .app-layout {
     display: block !important;
     width: 100% !important;
     overflow-x: hidden !important;
   }
 
-  /* Ocultar Sidebars definitivamente en móvil */
   .social-sidebar, 
   .email-sidebar {
     display: none !important;
   }
 
-  /* Ajustar contenedor principal */
   .main-content {
     width: 100% !important;
     max-width: 100% !important;
