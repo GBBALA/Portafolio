@@ -11,8 +11,6 @@
   }
 }
 
-// Dentro de Projects.scss
-
 .project {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -29,8 +27,7 @@
     box-sizing: border-box; // Incluir padding en el ancho
     gap: 0;
   }
-  
-}
+
   &__image-container {
     grid-column: 1 / 8;
     grid-row: 1 / 2;
