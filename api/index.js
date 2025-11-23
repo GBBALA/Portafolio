@@ -17,9 +17,7 @@ app.use(express.json());
 app.use(cors({ origin: frontendUrl }));
 
 // 5. Definir la ruta de la API
-// --- LÍNEA CORREGIDA ---
-// Vercel se encarga del /api. Nuestro código solo necesita gestionar lo que viene después.
-app.post('/contact', async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -35,7 +33,7 @@ app.post('/contact', async (req, res) => {
       html: `<h1>Contacto desde Portfolio</h1><p><strong>Nombre:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Mensaje:</strong> ${message}</p>`
     });
 
-    res.status(200).json({ message: 'Mensaje enviado con éxito.' });
+    res.status(200).json({ message: "Mensaje enviado con éxito." });
 
   } catch (serverError) {
     console.error(serverError);
@@ -44,6 +42,7 @@ app.post('/contact', async (req, res) => {
 });
 
 // 6. Iniciar el servidor (SOLO PARA DESARROLLO LOCAL)
+// Vercel ignorará esta parte
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`API Server escuchando en http://localhost:${PORT}`);
