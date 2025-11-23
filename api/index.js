@@ -1,52 +1,86 @@
-// 1. Cargar las variables de entorno para desarrollo local
 require('dotenv').config();
-
-// 2. Importar dependencias
 const express = require('express');
 const cors = require('cors');
 const { Resend } = require('resend');
 
-// 3. Inicializar
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEY); 
-const myEmail = process.env.MY_PERSONAL_EMAIL;
-const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
 
-// 4. Middlewares
-app.use(express.json());
-app.use(cors({ origin: frontendUrl }));
+// Inicializar Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// 5. Definir la ruta de la API
-app.post('/api/contact', async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
+// Configuración de CORS
+// Permitimos solicitudes desde tu dominio de producción y localhost
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // Tu URL de Vercel (ej: https://tu-portfolio.vercel.app)
+  'http://localhost:5173',  // Vite local default
+  'http://localhost:3000'
+];
 
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permitir requests sin origen (como Postman o server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
+  },
+  credentials: true
+}));
 
-    await resend.emails.send({
-      from: 'Portfolio Contact Form <onboarding@resend.dev>',
-      to: [myEmail],
-      subject: `Nuevo mensaje de tu Portfolio de: ${name}`,
+app.use(express.json());
+
+// Ruta de prueba para verificar que la API responde
+app.get('/api', (req, res) => {
+  res.json({ status: 'API Online', message: 'Backend funcionando correctamente' });
+});
+
+// Ruta de contacto
+// Nota: Al usar el rewrite de vercel, la ruta base sigue llegando.
+app.post('/api/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios.' });
+  }
+
+  try {
+    const data = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: [process.env.MY_PERSONAL_EMAIL], // Asegúrate que esta ENV exista
       reply_to: email,
-      html: `<h1>Contacto desde Portfolio</h1><p><strong>Nombre:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Mensaje:</strong> ${message}</p>`
+      subject: `Nuevo contacto de: ${name}`,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px;">
+          <h2>Nuevo Mensaje del Portfolio</h2>
+          <p><strong>De:</strong> ${name} (${email})</p>
+          <hr/>
+          <p>${message}</p>
+        </div>
+      `
     });
 
-    res.status(200).json({ message: "Mensaje enviado con éxito." });
+    if (data.error) {
+       console.error('Error Resend:', data.error);
+       return res.status(500).json({ error: data.error.message });
+    }
 
-  } catch (serverError) {
-    console.error(serverError);
-    res.status(500).json({ error: 'Error interno del servidor.' });
+    return res.status(200).json({ message: 'Correo enviado exitosamente' });
+
+  } catch (error) {
+    console.error('Error interno:', error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
 
-// 6. Iniciar el servidor (SOLO PARA DESARROLLO LOCAL)
-// Vercel ignorará esta parte
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`API Server escuchando en http://localhost:${PORT}`);
-});
-
-// 7. Exportar la app (SOLO PARA VERCEL)
+// Exportar app para Vercel
 module.exports = app;
+
+// Listener solo para desarrollo local
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo localmente en http://localhost:${PORT}`);
+  });
+}
