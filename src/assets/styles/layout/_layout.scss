@@ -1,53 +1,66 @@
 @use '../base/variables' as *;
 
 // --- Definición de variables de layout ---
-$sidebar-width: 40px; // Ancho fijo para las barras laterales
-$header-height: 80px; // Altura del header para el padding superior
+$sidebar-width: 40px; 
+$header-height: 80px; 
 
-// --- Estructura Principal de la Aplicación con CSS Grid ---
+// --- Estructura Principal de la Aplicación ---
 .app-layout {
   display: grid;
-  // DEFINICIÓN DE LA RETÍCULA DE 3 COLUMNAS:
-  // Col 1: Ancho de la barra lateral | Col 2: Espacio flexible | Col 3: Ancho de la barra lateral
+  // ESTRUCTURA DESKTOP (Por defecto)
   grid-template-columns: $sidebar-width 1fr $sidebar-width;
   min-height: 100vh;
+  width: 100%;       // Aseguramos que no exceda el viewport
+  overflow-x: hidden; // Cortamos desbordamientos laterales
+
+  // --- RESPONSIVE FIX (MÓVIL) ---
+  // Cuando la pantalla es pequeña, "rompemos" la grid y usamos bloque normal
+  @media (max-width: 768px) {
+    display: block; // <--- ESTA ES LA CLAVE. Adiós Grid en móvil.
+    position: relative;
+  }
 }
 
-// --- Posicionamiento de los Componentes en la Retícula ---
-
-// La barra social va en la primera columna
+// --- Sidebars (Barras laterales) ---
 .social-sidebar {
   grid-column: 1 / 2;
+  // En móvil, las ocultamos o las posicionamos diferente para que no ensanchen la pantalla
+  @media (max-width: 768px) {
+    display: none; // Ocultar en móvil (práctica común para evitar errores de ancho)
+  }
 }
 
-// La barra de email (si la tienes) va en la tercera columna
-.email-sidebar { // Asegúrate de que tu componente de email tenga esta clase
+.email-sidebar {
   grid-column: 3 / 4;
+  @media (max-width: 768px) {
+    display: none; // Ocultar en móvil
+  }
 }
 
 // --- Contenedor Principal del Contenido ---
-// Este contenedor va en la columna central y flexible
 .main-content {
-  grid-column: 2 / 3; // Ocupa la columna del medio
-  width: 100%; // Ocupa todo el ancho de su columna
-  max-width: $container-width; // Pero no más de 1100px
-  margin: 0 auto; // <<-- ESTO FINALMENTE LO CENTRARÁ DENTRO DE LA COLUMNA
+  grid-column: 2 / 3; 
+  width: 100%; 
+  max-width: $container-width; // Ej: 1100px
+  margin: 0 auto;
   
-  // Padding para que no se pegue al header ni a los bordes en móvil
+  // Padding Desktop
   padding-top: $header-height;
   padding-left: 25px;
   padding-right: 25px;
 
+  // --- AJUSTE MÓVIL ---
   @media (max-width: 768px) {
-    // En móvil, las barras laterales desaparecen, así que el contenido ocupa todo
-    grid-column: 1 / 4;
-    padding-left: 20px;
-    padding-right: 20px;
+    // Al estar en display: block (padre), ya no necesitamos grid-column
+    width: 100%;
+    padding-left: 1rem;  // Padding más pequeño y seguro
+    padding-right: 1rem;
+    padding-top: 100px;  // Un poco más de aire arriba para el header flotante
+    overflow-x: hidden;  // Doble seguridad
   }
 }
 
-// --- Reglas para los Header, Footer y Sidebars ---
-// Los posicionamos de forma fija para que floten sobre el contenido
+// --- Elementos Flotantes ---
 .header,
 .social-sidebar,
 .email-sidebar {

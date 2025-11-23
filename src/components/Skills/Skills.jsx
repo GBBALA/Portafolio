@@ -45,7 +45,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills">
-      <h2 className="section-title" style={{ '--section-counter': "''" }}>Tecnologías</h2>
+      <h2 className="section-title" style={{ '--section-counter': "''" }}>Habilidades</h2>
       
       <div className="skills__container">
         {/* Lista de Pestañas / Navegación */}
