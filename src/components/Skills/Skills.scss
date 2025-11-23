@@ -1,23 +1,26 @@
 @use '../../assets/styles/base/variables' as *;
 
 .skills {
-  // --- CORRECCIÓN DE LAYOUT ---
-  // ELIMINADO: max-width: 700px; <-- Causa principal del problema.
-  // ELIMINADO: margin: 0 auto;   <-- Redundante y conflictivo.
-  // Ahora la sección ocupará el ancho completo del layout principal (1100px).
   padding: 100px 0;
-  min-height: 500px; // Aumentamos la altura mínima para darle más espacio.
+  min-height: 500px;
+  width: 100%;
+
+  // Ajuste de padding en móvil
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
 
   &__container {
     display: flex;
-    gap: 3rem; // Aumentamos el espacio entre las pestañas y el contenido.
+    gap: 3rem;
 
-    @media (max-width: 768px) { // Un punto de quiebre más adecuado
+    @media (max-width: 900px) {
       flex-direction: column;
       gap: 2rem;
     }
   }
 
+  // --- BARRA DE PESTAÑAS (TIPO APP EN MÓVIL) ---
   &__tabs {
     display: flex;
     flex-direction: column;
@@ -33,21 +36,45 @@
       height: 100%;
       background-color: $light-bg-color;
     }
+
+    // Transformación a Scroll Horizontal en Móvil
+    @media (max-width: 900px) {
+      flex-direction: row; // Horizontal
+      overflow-x: auto;    // Scrollable
+      width: 100%;
+      padding-bottom: 1rem; // Espacio para scrollbar
+      border-bottom: 1px solid $light-bg-color;
+      
+      &::before { display: none; } // Quitamos la línea vertical
+      
+      // Ocultar scrollbar fea
+      &::-webkit-scrollbar { display: none; }
+    }
   }
 
   &__tab {
     font-family: $font-family-mono;
-    font-size: $font-size-base; // Aumentamos el tamaño de fuente para mejor legibilidad.
+    font-size: 1rem; // Texto base grande
     color: $dark-text-color;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 1rem 1.75rem; // Más padding para un área de clic más grande.
+    padding: 1rem 1.75rem;
     text-align: left;
     white-space: nowrap;
     border-left: 2px solid transparent;
     transition: all $transition-speed ease;
     margin-left: -2px;
+
+    // Ajuste Móvil: Botones tipo cápsula o tabs
+    @media (max-width: 900px) {
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      margin-left: 0;
+      padding: 1rem;
+      font-size: 0.95rem;
+      flex-shrink: 0; // No encoger
+    }
 
     &:hover {
       background-color: rgba($accent-color, 0.1);
@@ -58,29 +85,43 @@
       color: $accent-color;
       background-color: $light-bg-color;
       border-left: 2px solid $accent-color;
+
+      @media (max-width: 900px) {
+        border-left: none;
+        border-bottom: 2px solid $accent-color;
+        background-color: rgba($accent-color, 0.05);
+      }
     }
   }
 
   &__content {
     position: relative;
     width: 100%;
+    min-height: 300px; // Evita saltos de altura
   }
 
   &__grid {
     display: grid;
-    // CORRECCIÓN DE TAMAÑO: Hacemos las columnas un poco más grandes.
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 2rem; // Más espacio entre las tarjetas.
+    // Desktop: Auto-fit
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
     
     opacity: 0;
     visibility: hidden;
     position: absolute;
+    width: 100%; // Asegurar ancho
     transition: opacity 0.5s ease, visibility 0.5s ease;
 
     &--active {
       opacity: 1;
       visibility: visible;
       position: relative;
+    }
+
+    // Ajuste Móvil: 2 columnas fijas grandes
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr 1fr; 
+        gap: 1rem;
     }
   }
 }
@@ -90,27 +131,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem; // Un poco más de espacio interno.
-  padding: 1.5rem 1rem; // Más padding vertical.
+  gap: 1rem;
+  padding: 1.5rem 1rem;
   background-color: $light-bg-color;
   border-radius: $border-radius;
   transition: transform $transition-speed ease;
-  min-height: 120px; // Tarjetas un poco más altas.
+  min-height: 140px; // Tarjetas más altas
 
   &:hover {
     transform: translateY(-5px);
   }
 
   &__logo {
-    // CORRECCIÓN DE TAMAÑO: Logos más grandes para mayor impacto visual.
-    height: 50px; 
-    width: 50px;
+    // ICONOS GRANDES
+    height: 60px; 
+    width: 60px;
+    object-fit: contain;
+    
+    @media (max-width: 768px) {
+        height: 55px;
+        width: 55px;
+    }
   }
 
   &__name {
-    color: $text-color; // Un color un poco más brillante para el texto.
+    color: $text-color;
     font-family: $font-family-body;
-    // CORRECCIÓN DE TAMAÑO: Texto más grande y legible.
-    font-size: $font-size-base; 
+    font-size: 1rem; // Texto legible
+    text-align: center;
+    font-weight: 500;
   }
 }

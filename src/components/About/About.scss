@@ -1,17 +1,16 @@
 @use '../../assets/styles/base/variables' as *;
 
 .about {
-  // ELIMINADO: max-width: 900px; <-- Esto impedía el centrado global.
-  // ELIMINADO: margin: 0 auto;   <-- Esto también impedía el centrado global.
-  padding: 100px 0; // Se mantiene el padding vertical para dar espacio a la sección.
+  padding: 100px 0;
 
   &__content {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 50px;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr; // Una sola columna
+      text-align: left; // Mantener texto a la izquierda para leer mejor
     }
   }
 
@@ -20,13 +19,28 @@
       margin-bottom: 1.5rem;
       color: $dark-text-color;
       font-size: $font-size-lg;
+
+      // --- TEXTO GRANDE EN MÓVIL ---
+      @media (max-width: 768px) {
+        font-size: 1.15rem; // Aprox 18px
+        line-height: 1.7;   // Mayor interlineado
+        color: $text-color; // Mayor contraste
+      }
     }
+
     strong {
       color: $accent-color;
       font-weight: 500;
     }
+    
     .button {
       margin-top: 1rem;
+      // Botón ancho en móvil
+      @media (max-width: 768px) {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
     }
   }
 
@@ -34,8 +48,9 @@
     position: relative;
     max-width: 300px;
     
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       margin: 50px auto 0;
+      max-width: 280px; // Tamaño controlado pero visible
     }
   }
 
@@ -59,22 +74,22 @@
       z-index: -1;
       transition: all $transition-speed ease;
     }
-
-    &:hover::after {
-      top: 10px;
-      left: 10px;
-    }
   }
 
   &__image {
     position: relative;
     width: 100%;
     border-radius: $border-radius;
-  
+    //filter: grayscale(100%) contrast(1); // Filtro inicial
+    transition: filter 0.3s ease;
 
     &:hover {
-      mix-blend-mode: normal;
       filter: none;
+    }
+    
+    // En móvil quitamos el filtro para que se vea bien siempre
+    @media (max-width: 768px) {
+        filter: none;
     }
   }
 }

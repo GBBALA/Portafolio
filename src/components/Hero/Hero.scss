@@ -12,7 +12,7 @@
 
   &__container {
     max-width: 900px;
-    width: 100%; // Asegurar que ocupe el ancho disponible
+    width: 100%;
   }
 
   &__greeting {
@@ -20,22 +20,29 @@
     font-family: $font-family-mono;
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.1rem; // Saludo legible
+    }
   }
 
   &__typewriter {
     font-family: $font-family-headings;
-    // Reducimos un poco el mínimo del clamp para móviles muy pequeños
-    font-size: clamp(2rem, 8vw, 4.5rem); 
+    // Mínimo 1.8rem (aprox 28px) en móvil para que se vea GRANDE
+    font-size: clamp(2.2rem, 7vw, 4.5rem); 
     font-weight: 700;
     color: $white-color;
     margin-bottom: 1.5rem;
-    min-height: 1.3em;
-    
-    // --- SOLUCIÓN: Permitir que el texto se parta ---
-    word-break: break-word; 
-    overflow-wrap: break-word;
-    white-space: normal; // Fundamental
+    min-height: 3.6rem; // Reserva espacio para 2 líneas si se rompe
     line-height: 1.2;
+    
+    // Permitir que baje de línea
+    word-break: break-word;
+    white-space: normal;
+
+    @media (max-width: 768px) {
+        font-size: 2.2rem; // Tamaño fijo grande en móvil
+    }
 
     .Typewriter__cursor {
       color: $accent-color;
@@ -48,10 +55,11 @@
     max-width: 600px;
     margin: 0 auto 3rem auto;
     
-    // Ajuste móvil
+    // --- TEXTO DESCRIPTIVO GRANDE ---
     @media (max-width: 768px) {
-      font-size: 1rem; // Texto más legible
-      padding: 0 10px;
+      font-size: 1.15rem; // Texto cuerpo grande
+      line-height: 1.6;
+      color: $text-color; // Un poco más claro que dark-text para contraste
     }
   }
 
@@ -59,21 +67,14 @@
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    flex-wrap: wrap; // Los botones bajarán si no caben
-  }
-
-  // --- RESPONSIVE DESIGN (Mobile) ---
-  @media (max-width: 576px) {
-    padding: 80px 20px 0; // Dar espacio al header si está arriba
-
-    &__image-container {
-      margin-top: 2rem;
-      .hero__image {
-        width: 180px;  // Un poco más pequeño para asegurar que entre
-        height: 180px; 
-        object-fit: cover; 
-        border-radius: 50%; // Opcional: hacerlo redondo se ve bien en móvil
-      }
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+        flex-direction: column; // Botones uno encima del otro en móvil
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        gap: 1rem;
     }
   }
 }

@@ -5,32 +5,37 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: auto; 
-  max-width: 90%; // En escritorio está bien
+  width: auto;
+  max-width: 90%;
   z-index: 1000;
   transition: top $transition-speed ease;
-  
+
   // Estilo Cápsula
-  background-color: rgba($light-bg-color, 0.85); // Un poco más opaco para legibilidad
+  background-color: rgba($light-bg-color, 0.90); // Más opaco para que destaque más
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba($white-color, 0.1);
+  border: 1px solid rgba($white-color, 0.15);
   border-radius: 50px;
   padding: 0.75rem 2rem;
-  box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+  box-shadow: 0 10px 30px -10px rgba(2,12,27,0.9);
 
-  // --- AJUSTE MÓVIL CRÍTICO ---
+  // --- AJUSTE MÓVIL (HACERLO MÁS GRANDE) ---
   @media (max-width: 768px) {
-    width: 95%;      // Ocupar casi todo el ancho
-    max-width: 100%; // Permitir crecer
-    padding: 0.5rem 1rem; // Reducir el padding interno drásticamente
-    border-radius: 12px;  // Menos redondo para ganar espacio lateral (opcional)
-    bottom: 20px;    // Mover abajo (opcional, pero ayuda UX)
-    top: auto;       // Anular top
+    width: 90%;       // Un poco menos del borde para que parezca flotante
+    max-width: 400px; // Evita que se estire demasiado en tablets
+    padding: 0.8rem 1.5rem; // ¡MÁS PADDING! Para que se vea más grande
+    border-radius: 30px; 
+    bottom: 30px;     // Flotando abajo
+    top: auto;        // Anular top
   }
 
   &--hidden {
     top: -100px;
+    // En móvil, si está abajo, lo escondemos hacia abajo
+    @media (max-width: 768px) {
+      top: auto;
+      bottom: -100px;
+    }
   }
 
   &__container {
@@ -39,13 +44,14 @@
     justify-content: center;
     height: auto;
     
-    // Si el contenido es mucho, permitimos scroll horizontal suave dentro de la cápsula
+    // Scroll horizontal suave en móvil
     @media (max-width: 768px) {
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
-      // Ocultar barra de scroll fea
+      // Ocultar scrollbar
       &::-webkit-scrollbar { display: none; } 
+      scrollbar-width: none;
     }
   }
 
@@ -56,9 +62,9 @@
     padding: 0;
     list-style: none;
 
-    // En móvil, reducimos el espacio entre links
     @media (max-width: 768px) {
-      gap: 1rem; 
+      gap: 1.5rem; // Espacio cómodo entre links
+      padding: 0 5px; // Un poco de aire lateral
     }
   }
 
@@ -69,10 +75,13 @@
     text-decoration: none;
     transition: color $transition-speed ease;
     padding: 0.5rem 0;
-    white-space: nowrap; // Mantenemos en una línea dentro del scroll
+    white-space: nowrap; 
 
-    @media (max-width: 480px) {
-      font-size: 0.8rem; // Letra un pelín más chica
+    // --- FUENTE MÁS GRANDE EN MÓVIL ---
+    @media (max-width: 768px) {
+      font-size: 1rem; // 16px es el estándar legible
+      font-weight: 500;
+      color: $white-color; // Blanco puro para mejor contraste en móvil
     }
 
     &:hover {
@@ -94,7 +103,6 @@
     }
     &__link {
       font-size: 1rem;
-      white-space: nowrap;
     }
   }
 }
