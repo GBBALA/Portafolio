@@ -53,17 +53,26 @@
   }
 
   // Media Query para adaptar la cápsula a pantallas más pequeñas
-  @media (max-width: 768px) {
-    width: 95%;
-    padding: 0.5rem 1rem;
-    top: 10px;
-    
-    &__nav-list {
-      gap: 1.5rem;
-    }
-
-    &__nav-link {
-      font-size: 0.8rem;
-    }
+// --- Media Query para Desktop ---
+@media (min-width: 768px) {
+  &__toggle {
+    display: none;
   }
+
+  &__menu {
+    position: static;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    gap: 2.5rem;
+    transition: none;
+  }
+    
+  &__link {
+    font-size: 1rem;
+    // --- AÑADIDO ---
+    white-space: nowrap; // Evita que el texto del enlace se rompa en dos líneas
+  }
+}
 }

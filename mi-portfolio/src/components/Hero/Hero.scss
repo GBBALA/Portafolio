@@ -47,4 +47,25 @@
     justify-content: center;
     flex-wrap: wrap; // Asegura que los botones se ajusten en pantallas pequeñas
   }
+
+  // --- RESPONSIVE DESIGN (Mobile) ---
+  @media (max-width: 576px) {
+    // Ajustes al contenedor principal
+    padding: 0 20px;
+
+    // Ajustes al texto tipo máquina de escribir
+    &__typewriter {
+      font-size: clamp(2.2rem, 10vw, 3rem);
+    }
+
+    // Ajustes a la imagen (Bloque Modificado Solicitado)
+    &__image-container {
+      .hero__image {
+        width: 240px;  // Reducimos el tamaño
+        height: 240px; // Reducimos el tamaño
+        // Sugerencia Senior: Asegura que la imagen mantenga el ratio si cambias dimensiones
+        object-fit: cover; 
+      }
+    }
+  }
 }
