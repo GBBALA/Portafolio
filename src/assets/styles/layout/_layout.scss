@@ -7,26 +7,24 @@ $header-height: 80px;
 // --- Estructura Principal de la Aplicación ---
 .app-layout {
   display: grid;
-  // ESTRUCTURA DESKTOP (Por defecto)
-  grid-template-columns: $sidebar-width 1fr $sidebar-width;
+  grid-template-columns: 40px 1fr 40px;
   min-height: 100vh;
-  width: 100%;       // Aseguramos que no exceda el viewport
-  overflow-x: hidden; // Cortamos desbordamientos laterales
+  width: 100%;
+  overflow-x: hidden; /* IMPORTANTE: Corta cualquier desbordamiento */
 
-  // --- RESPONSIVE FIX (MÓVIL) ---
-  // Cuando la pantalla es pequeña, "rompemos" la grid y usamos bloque normal
+  // --- RESPONSIVE FIX ---
   @media (max-width: 768px) {
-    display: block; // <--- ESTA ES LA CLAVE. Adiós Grid en móvil.
+    display: block; /* Desactivamos Grid, usamos bloque normal */
     position: relative;
   }
 }
 
 // --- Sidebars (Barras laterales) ---
-.social-sidebar {
-  grid-column: 1 / 2;
-  // En móvil, las ocultamos o las posicionamos diferente para que no ensanchen la pantalla
+.social-sidebar, .email-sidebar {
+  grid-column: 1 / 2; /* o la que corresponda */
+  
   @media (max-width: 768px) {
-    display: none; // Ocultar en móvil (práctica común para evitar errores de ancho)
+    display: none; /* Desaparecen totalmente en móvil */
   }
 }
 
