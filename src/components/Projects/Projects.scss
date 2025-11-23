@@ -11,6 +11,8 @@
   }
 }
 
+// Dentro de Projects.scss
+
 .project {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -18,20 +20,17 @@
   gap: 10px;
   margin-bottom: 100px;
 
-  // --- SOLUCIÓN CRÍTICA: Apagar la Grid de 12 columnas en móvil ---
-  @media (max-width: 768px) {
-    display: flex;          // Usamos Flexbox
-    flex-direction: column; // Uno debajo del otro
-    gap: 0;                 // Sin gap, el padding lo maneja el contenido
-    margin-bottom: 4rem;    // Separación entre proyectos
-    
-    // Estilo Tarjeta Sólida
-    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); 
-    background-color: $light-bg-color; 
-    border-radius: $border-radius;
-    overflow: hidden; 
+  // --- ESTO ES LO QUE HACE QUE SE VEA BIEN EN MÓVIL ---
+  @media (max-width: 900px) {
+    display: flex;          // Cambiar a Flex
+    flex-direction: column; // Columna vertical
+    width: 100%;            // Ancho total
+    max-width: 100%;
+    box-sizing: border-box; // Incluir padding en el ancho
+    gap: 0;
   }
-
+  
+}
   &__image-container {
     grid-column: 1 / 8;
     grid-row: 1 / 2;

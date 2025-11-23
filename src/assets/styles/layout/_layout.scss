@@ -1,69 +1,66 @@
 @use '../base/variables' as *;
 
-// --- Definición de variables de layout ---
 $sidebar-width: 40px; 
 $header-height: 80px; 
 
-// --- Estructura Principal de la Aplicación ---
 .app-layout {
+  // CONFIGURACIÓN DESKTOP (3 COLUMNAS)
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: $sidebar-width 1fr $sidebar-width;
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
+  position: relative;
 
-  // --- RESPONSIVE FIX ---
-  @media (max-width: 900px) { // Subimos a 900px para tablets también
-    display: block !important; // FORZAMOS BLOQUE
-    width: 100% !important;
-    max-width: 100vw !important;
-    position: relative;
+  // --- ARREGLO MÓVIL (CRÍTICO) ---
+  @media (max-width: 900px) {
+    // Cambiamos Grid por Flex en columna.
+    // Esto ELIMINA la reserva de espacio de los 40px laterales.
+    display: flex;
+    flex-direction: column;
+    
+    // Aseguramos que no haya desbordamiento
+    width: 100%;
+    overflow-x: hidden;
   }
 }
 
-// --- Sidebars (Barras laterales) ---
-.social-sidebar, .email-sidebar {
-  grid-column: 1 / 2; /* o la que corresponda */
-  
-  @media (max-width: 768px) {
-    display: none; /* Desaparecen totalmente en móvil */
-  }
+// Sidebars
+.social-sidebar {
+  grid-column: 1 / 2;
+  @media (max-width: 900px) { display: none; }
 }
 
 .email-sidebar {
   grid-column: 3 / 4;
-  @media (max-width: 768px) {
-    display: none; // Ocultar en móvil
-  }
+  @media (max-width: 900px) { display: none; }
 }
 
-// --- Contenedor Principal del Contenido ---
+// Contenido Principal
 .main-content {
   grid-column: 2 / 3; 
   width: 100%; 
-  max-width: $container-width; // Ej: 1100px
+  max-width: $container-width; 
   margin: 0 auto;
-  
-  // Padding Desktop
   padding-top: $header-height;
   padding-left: 25px;
   padding-right: 25px;
 
-  // --- AJUSTE MÓVIL ---
-  @media (max-width: 768px) {
-    // Al estar en display: block (padre), ya no necesitamos grid-column
+  // --- ARREGLO MÓVIL ---
+  @media (max-width: 900px) {
+    // Quitamos los paddings laterales grandes
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 100px; 
+    
+    // IMPORTANTE: Asegurar que el contenido no fuerce el ancho
     width: 100%;
-    padding-left: 1rem;  // Padding más pequeño y seguro
-    padding-right: 1rem;
-    padding-top: 100px;  // Un poco más de aire arriba para el header flotante
-    overflow-x: hidden;  // Doble seguridad
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
-// --- Elementos Flotantes ---
-.header,
-.social-sidebar,
-.email-sidebar {
+// Flotantes
+.header, .social-sidebar, .email-sidebar {
   position: fixed;
   z-index: 10;
 }
