@@ -1,4 +1,8 @@
-// 1. MÓDULOS DE SASS (DEBEN IR PRIMERO)
+/* =========================================
+   SRC/ASSETS/STYLES/MAIN.SCSS
+   ========================================= */
+
+// 1. MÓDULOS (Siempre primero)
 @use 'base/variables';
 @use 'base/reset';
 @use 'base/typography';
@@ -7,60 +11,76 @@
 @use 'layout/layout';
 @use 'components/button';
 @use 'components/card';
+// Importa tus sidebars aquí para asegurar que carguen
+@use 'components/SocialSidebar/SocialSidebar'; 
+// @use 'components/EmailSidebar/EmailSidebar'; // Descomenta si lo usas
 
-// 2. DEPENDENCIAS EXTERNAS
+// 2. FUENTES
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); // Para la fuente monoespaciada
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-// main.scss
+/* =========================================
+   3. CORRECCIONES GLOBALES "NUCLEARES"
+   ========================================= */
 
-// ... tus @use ...
-
-// --- PARCHE DE SEGURIDAD GLOBAL ---
+/* A. Forzar al navegador a respetar el ancho del dispositivo */
 html, body {
   width: 100%;
-  max-width: 100vw;       /* El ancho máximo es la ventana */
-  overflow-x: hidden;     /* Ocultar scroll horizontal */
+  max-width: 100vw;       
+  overflow-x: hidden;     /* CORTA cualquier cosa que se salga */
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
-/* Evitar que imágenes grandes rompan el móvil */
-img, video, svg {
-  max-width: 100%;
-  height: auto;
-}
-/* --- src/main.scss (Al final del archivo) --- */
-
-/* FORZAR MÓVIL: Corrección de Emergencia */
-@media (max-width: 900px) {
-  /* 1. Desactivar la Grid */
-  .app-layout {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    overflow-x: hidden !important;
-  }
-
-  /* 2. Matar barras laterales */
-  .social-sidebar, .email-sidebar {
-    display: none !important;
-  }
-
-  /* 3. Ajustar contenido */
-  .main-content {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 80px 20px 40px 20px !important;
-  }
-}
-
-/* 4. REGLA SUPREMA: Nada supera el ancho de pantalla */
-html, body, #root {
+#root {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+}
+
+/* B. Controlar las PARTÍCULAS (Culpable habitual) */
+#tsparticles, canvas {
+  max-width: 100vw !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important; /* Fijo al fondo */
+  top: 0;
+  left: 0;
+  z-index: -1 !important; /* Siempre atrás */
+  pointer-events: none; /* Que no interfiera con clicks */
+}
+
+/* C. Evitar que imágenes o SVGs rompan el layout */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================
+   4. LAYOUT MÓVIL FORZADO
+   ========================================= */
+@media (max-width: 900px) {
+  
+  /* Desactivar Grid principal */
+  .app-layout {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Ocultar Sidebars definitivamente en móvil */
+  .social-sidebar, 
+  .email-sidebar {
+    display: none !important;
+  }
+
+  /* Ajustar contenedor principal */
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 80px 20px 40px 20px !important;
+    margin: 0 !important;
+  }
 }
