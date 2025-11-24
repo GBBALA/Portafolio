@@ -1,150 +1,427 @@
 @use '../../assets/styles/base/variables' as *;
 
-$primary-accent: #e91e63;
-$background-dark: #121212; // O usa $bg-color
-$form-bg: #1e1e1e;          // O usa $light-bg-color
-$text-color-light: #f5f5f5;
-$text-color-secondary: #a0a0a0;
-$border-color: #333333;
-$base-border-radius: 6px;
+// Variables locales profesionales
+$local-accent: $accent-color;
+$glass-bg: rgba($light-bg-color, 0.4);
+$glass-border: rgba($white-color, 0.1);
+$input-bg: rgba(0, 0, 0, 0.25);
+$input-border: rgba($white-color, 0.12);
+$border-radius-card: 20px;
+$border-radius-input: 10px;
+$shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 8px 30px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
 
 .contact-section {
-  // background-color: $background-dark; // Usa transparente si quieres ver partículas
-  font-family: 'Inter', sans-serif;
-  padding: 100px 20px;
+  padding: 140px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  position: relative;
+  
   @media (max-width: 768px) {
-    padding: 60px 15px; // Menos padding vertical en móvil
+    padding: 100px 20px;
   }
 }
 
 .contact-form-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 680px;
+  position: relative;
+  z-index: 2;
 }
 
 .contact-form {
+  // --- GLASSMORPHISM PROFESIONAL ---
+  background: linear-gradient(
+    135deg,
+    rgba($light-bg-color, 0.45) 0%,
+    rgba($light-bg-color, 0.35) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid $glass-border;
+  border-radius: $border-radius-card;
+  padding: 4rem 3.5rem;
+  box-shadow: $shadow-lg, inset 0 1px 0 rgba($white-color, 0.1);
+  position: relative;
+  
+  // Borde sutil de luz en la parte superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($local-accent, 0.3),
+      transparent
+    );
+  }
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 1.8rem;
+    border-radius: 16px;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
   &__title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: $text-color-light;
-    margin-bottom: 1rem;
-    position: relative;
-    display: inline-block;
-    word-break: break-word; // Evita desbordes
-
-    // Ajuste Móvil (ACTUALIZADO: Bajamos de 2.5rem a 2rem)
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    
     @media (max-width: 768px) {
-      font-size: 2rem; 
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      height: 12px;
-      width: 100%;
-      background-color: $primary-accent;
-      z-index: -1;
-      opacity: 0.8;
+      font-size: 2.2rem;
     }
   }
 
   &__subtitle {
-    font-size: 1.1rem;
-    color: $text-color-secondary;
-    line-height: 1.7;
-    margin-bottom: 3rem;
+    font-size: 1.05rem;
+    color: rgba($text-color, 0.75);
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.65;
+    font-weight: 400;
   }
 
   &__field {
     margin-bottom: 2rem;
+    position: relative;
+    
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   &__label {
     display: block;
-    font-size: 1rem; // Label grande
-    font-weight: 500;
-    color: $text-color-secondary;
-    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $white-color;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.9;
   }
 
   &__input,
   &__textarea {
     width: 100%;
-    background-color: $form-bg;
-    color: $text-color-light;
-    border: 1px solid $border-color;
-    border-radius: $base-border-radius;
-    
-    // --- INPUTS TÁCTILES GRANDES (ACTUALIZADO: Bajamos de 1.2rem a 1rem) ---
-    padding: 1rem; 
-    font-size: 1rem; // Evita zoom en iOS (min 16px)
-    
+    background-color: $input-bg;
+    color: $white-color;
+    border: 1.5px solid $input-border;
+    border-radius: $border-radius-input;
+    padding: 1.1rem 1.3rem;
+    font-size: 1rem;
     font-family: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    // Sombra interna profesional
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12);
 
+    &::placeholder {
+      color: rgba($text-color, 0.4);
+      font-weight: 400;
+    }
+
+    // --- ESTADO FOCUS REFINADO ---
     &:focus {
       outline: none;
-      border-color: $primary-accent;
-      box-shadow: 0 0 0 2px rgba($primary-accent, 0.2);
+      background-color: rgba($input-bg, 0.9);
+      border-color: rgba($local-accent, 0.6);
+      box-shadow: 
+        inset 0 2px 6px rgba(0, 0, 0, 0.12),
+        0 0 0 3px rgba($local-accent, 0.08),
+        $shadow-sm;
+      transform: translateY(-1px);
+    }
+
+    // Estado de error
+    &.error {
+      border-color: rgba(#ef4444, 0.6);
+      
+      &:focus {
+        box-shadow: 
+          inset 0 2px 6px rgba(0, 0, 0, 0.12),
+          0 0 0 3px rgba(#ef4444, 0.08);
+      }
+    }
+
+    // Estado de éxito
+    &.success {
+      border-color: rgba(#10b981, 0.6);
     }
   }
 
   &__textarea {
     resize: vertical;
     min-height: 160px;
+    line-height: 1.6;
+  }
+
+  // Mensaje de error por campo
+  &__field-error {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #ef4444;
+    font-weight: 500;
+    animation: slideIn 0.2s ease;
   }
 
   &__footer {
-    margin-top: 2rem;
+    margin-top: 3rem;
     display: flex;
-    justify-content: center; // Centrar botón en móvil
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 
+  // --- BOTÓN PROFESIONAL PREMIUM ---
   &__button {
-    background: transparent;
-    border: none;
-    color: $text-color-light;
-    font-size: 1.3rem; // Texto botón grande
-    font-weight: 700;
-    padding: 15px 30px; // Área clicable grande
+    background: linear-gradient(
+      135deg,
+      rgba($local-accent, 0.15) 0%,
+      rgba($local-accent, 0.05) 100%
+    );
+    color: $local-accent;
+    font-family: $font-family-mono;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1.15rem 3rem;
+    border: 1.5px solid rgba($local-accent, 0.4);
+    border-radius: $border-radius-input;
     cursor: pointer;
     position: relative;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 1px solid transparent; // Estabilidad
-
-    &::after {
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-sm;
+    
+    // Efecto de brillo sutil
+    &::before {
       content: '';
       position: absolute;
-      bottom: 10px;
-      left: 0;
+      top: 0;
+      left: -100%;
       width: 100%;
-      height: 2px;
-      background-color: $text-color-secondary;
-      transition: all 0.3s;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba($local-accent, 0.2),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba($local-accent, 0.25) 0%,
+        rgba($local-accent, 0.15) 100%
+      );
+      border-color: rgba($local-accent, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -8px rgba($local-accent, 0.4);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: $shadow-sm;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          rgba($local-accent, 0.15) 0%,
+          rgba($local-accent, 0.05) 100%
+        );
+        box-shadow: $shadow-sm;
+      }
     }
     
-    &:hover::after {
-      background-color: $primary-accent;
-      transform: scaleX(1.1);
+    // Estado de carga
+    &--loading {
+      pointer-events: none;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin-left: 10px;
+        border: 2px solid rgba($local-accent, 0.3);
+        border-top-color: $local-accent;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
     }
   }
   
+  // Mensajes de estado refinados
   &__status-message {
-    margin-top: 2rem;
-    padding: 1rem;
-    border-radius: $base-border-radius;
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border-radius: $border-radius-input;
     text-align: center;
+    font-size: 0.95rem;
     font-weight: 500;
-    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &--success {
+      background: linear-gradient(
+        135deg,
+        rgba(#10b981, 0.15) 0%,
+        rgba(#10b981, 0.08) 100%
+      );
+      color: #10b981;
+      border: 1px solid rgba(#10b981, 0.3);
+      box-shadow: 0 4px 12px rgba(#10b981, 0.1);
+    }
+
+    &--error {
+      background: linear-gradient(
+        135deg,
+        rgba(#ef4444, 0.15) 0%,
+        rgba(#ef4444, 0.08) 100%
+      );
+      color: #ef4444;
+      border: 1px solid rgba(#ef4444, 0.3);
+      box-shadow: 0 4px 12px rgba(#ef4444, 0.1);
+    }
+  }
+
+  // Indicador de caracteres restantes (opcional)
+  &__char-count {
+    text-align: right;
+    font-size: 0.8rem;
+    color: rgba($text-color, 0.5);
+    margin-top: 0.4rem;
+    font-family: $font-family-mono;
+  }
+}
+
+// Animaciones profesionales
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Enlaces sociales profesionales
+.social-links {
+  margin-top: 5rem;
+  text-align: center;
+  
+  &__title {
+    color: rgba($text-color, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 1.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
     
-    &--success { color: #2ecc71; background: rgba(#2ecc71, 0.1); }
-    &--error { color: #e74c3c; background: rgba(#e74c3c, 0.1); }
+    a {
+      color: rgba($text-color, 0.8);
+      font-size: 1.4rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 100%;
+        height: 2px;
+        background-color: $local-accent;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      &:hover {
+        color: $local-accent;
+        transform: translateY(-4px);
+        
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+      }
+    }
+  }
+}
+
+// Responsive refinado
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 2rem 1.5rem;
+    
+    &__title {
+      font-size: 1.9rem;
+    }
+    
+    &__button {
+      width: 100%;
+      padding: 1.1rem 2rem;
+    }
+  }
+  
+  .social-links__icons {
+    gap: 2rem;
+    
+    a {
+      font-size: 1.3rem;
+    }
   }
 }

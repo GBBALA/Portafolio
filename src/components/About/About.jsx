@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.scss';
 // Asumo que tu foto optimizada está en esta ruta
-import profileImage from '../../assets/images/profile.webp'; 
+import profileImage from '../../assets/images/profile.jpg'; 
 
 const About = () => {
   return (
