@@ -8,34 +8,40 @@
   width: auto;
   max-width: 90%;
   z-index: 1000;
-  transition: top $transition-speed ease;
+  transition: all $transition-speed ease; // Animación suave para todo
 
-  // Estilo Cápsula
-  background-color: rgba($light-bg-color, 0.90); // Más opaco para que destaque más
+  // Estilo Cápsula Desktop
+  background-color: rgba($light-bg-color, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba($white-color, 0.15);
+  border: 1px solid rgba($white-color, 0.1);
   border-radius: 50px;
   padding: 0.75rem 2rem;
-  box-shadow: 0 10px 30px -10px rgba(2,12,27,0.9);
+  box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
 
-  // --- AJUSTE MÓVIL NORMALIZADO (REEMPLAZADO) ---
+  // --- AJUSTE MÓVIL (CALIBRADO) ---
   @media (max-width: 768px) {
-    width: auto;           // ANTES: 90%
-    max-width: 95%;        // ANTES: 400px
-    // Reducimos el padding inflado
-    padding: 0.5rem 1rem;  // ANTES: 0.8rem 1.5rem
-    border-radius: 50px;   // Volvemos a bordes redondos suaves (ANTES: 30px)
-    bottom: 20px;          // ANTES: 30px
-    top: auto;             // Anular top
+    // Posición: Lo mantenemos abajo porque es más fácil para el dedo, 
+    // pero lo hacemos PEQUEÑO.
+    top: auto; 
+    bottom: 20px; 
+    
+    width: auto;         // Que se ajuste al contenido
+    max-width: 90%;      // Que no toque los bordes
+    padding: 0.6rem 1.2rem; // Padding reducido (antes era enorme)
+    border-radius: 30px; 
+    
+    // Sombra más sutil
+    box-shadow: 0 5px 20px -5px rgba(2,12,27,0.9);
   }
 
   &--hidden {
     top: -100px;
-    // En móvil, si está abajo, lo escondemos hacia abajo
+    
+    // En móvil se esconde hacia abajo
     @media (max-width: 768px) {
       top: auto;
-      bottom: -100px;
+      bottom: -80px; 
     }
   }
 
@@ -45,14 +51,12 @@
     justify-content: center;
     height: auto;
     
-    // Scroll horizontal suave en móvil
+    // Scroll horizontal SUTIL si la pantalla es muy pequeña (iPhone SE)
     @media (max-width: 768px) {
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
-      // Ocultar scrollbar
       &::-webkit-scrollbar { display: none; } 
-      scrollbar-width: none;
     }
   }
 
@@ -64,8 +68,7 @@
     list-style: none;
 
     @media (max-width: 768px) {
-      gap: 1.5rem; // Espacio cómodo entre links
-      padding: 0 5px; // Un poco de aire lateral
+      gap: 1.2rem; // Menos espacio entre links
     }
   }
 
@@ -75,35 +78,34 @@
     color: $text-color;
     text-decoration: none;
     transition: color $transition-speed ease;
-    padding: 0.5rem 0;
-    white-space: nowrap; 
+    padding: 0; // Quitamos padding vertical extra
+    white-space: nowrap;
 
-    // --- FUENTE MÁS SUTIL EN MÓVIL (REEMPLAZADO) ---
+    // --- TEXTO MÓVIL NORMALIZADO ---
     @media (max-width: 768px) {
-      font-size: 0.85rem; // ANTES: 1rem (Volvemos a un tamaño sutil)
-      font-weight: 500;
-      color: $text-color; // Retirado el color blanco puro para usar $text-color por defecto
+      font-size: 0.85rem; // ~13-14px (Tamaño estándar de menú móvil)
+      color: $text-color; // Color grisáceo (menos agresivo que blanco puro)
     }
 
     &:hover {
       color: $accent-color;
     }
+    
+    // Clase activa (opcional si la usaras)
+    &.active {
+      color: $accent-color;
+    }
   }
 
-  // Desktop adjustments
+  // Ajustes Desktop
   @media (min-width: 768px) {
     &__toggle { display: none; }
     &__menu {
       position: static;
       flex-direction: row;
-      height: auto;
-      width: auto;
       background-color: transparent;
       gap: 2.5rem;
-      transition: none;
     }
-    &__link {
-      font-size: 1rem;
-    }
+    &__link { font-size: 1rem; }
   }
 }

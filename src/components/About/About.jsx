@@ -12,30 +12,15 @@ const About = () => {
       <div className="about__content">
         <div className="about__text">
           <p>
-            Soy un desarrollador de software con sede en Argentina, apasionado por la tecnología y la resolución de problemas. Mi formación como <strong>Técnico Superior en Programación</strong> en la Universidad Tecnológica Nacional (UTN) me ha proporcionado una base sólida en los principios de la ingeniería de software y el ciclo de vida del desarrollo.
+            Soy un desarrollador de software de Argentina, graduado como <strong>Técnico Universitario en Programación</strong> en la UTN. Mi formación me habilita para <strong>analizar problemas de procesamiento de datos</strong> y resolverlos mediante la selección de los algoritmos adecuados, desarrollando programas correctamente estructurados y eficientes.
           </p>
           <p>
-            Mi experiencia se centra en el desarrollo de aplicaciones web full-stack, con un fuerte dominio del ecosistema <strong>Java y Spring Boot</strong> para la construcción de APIs RESTful robustas y escalables, y <strong>React</strong> para la creación de interfaces de usuario dinámicas e interactivas.
+            En el ámbito profesional, aplico estos conocimientos en el desarrollo Full Stack, especializándome en la elaboración y corrección de software utilizando <strong>Java y Spring Boot</strong> para el backend y <strong>React</strong> para interfaces dinámicas. Poseo la capacidad para interpretar tareas definidas por Analistas de Sistemas y transformar requerimientos funcionales en soluciones de código robustas.
           </p>
           <p>
-            Mi background previo en hardware y atención al cliente me ha dotado de una excelente capacidad para la comunicación y la resolución metódica de problemas, habilidades que aplico en cada proyecto para entregar soluciones eficientes y de alta calidad.
+            Adicionalmente, cuento con una sólida práctica técnica en <strong>hardware</strong>, especializándome en el <strong>armado, diagnóstico y reparación de computadoras</strong>, asegurando el correcto funcionamiento y rendimiento de los equipos informáticos.
           </p>
           
-          {/* 
-            -- BOTÓN DE DESCARGA DE CV --
-            - href="/Javier-Quiroga-CV.pdf": Enlaza directamente al archivo en la carpeta /public.
-            - target="_blank": Abre el PDF en una nueva pestaña en lugar de navegar fuera del portafolio.
-            - rel="noopener noreferrer": Es una medida de seguridad importante para enlaces que abren nuevas pestañas.
-            - className="button ...": Le da el estilo de nuestros botones.
-          */}
-          <a 
-            href="/Javier-Quiroga-CV.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="button button--primary"
-          >
-            Descargar CV
-          </a>
         </div>
 
         <div className="about__image-container">

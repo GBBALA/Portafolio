@@ -3,28 +3,33 @@
 .about {
   padding: 100px 0;
 
+  @media (max-width: 768px) {
+    padding: 60px 0; // Menos aire vertical
+  }
+
   &__content {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 50px;
 
     @media (max-width: 900px) {
-      grid-template-columns: 1fr; // Una sola columna
-      text-align: left; // Mantener texto a la izquierda para leer mejor
+      grid-template-columns: 1fr;
+      gap: 30px; // Menos separación entre texto y foto
+      text-align: left;
     }
   }
 
   &__text {
     p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       color: $dark-text-color;
       font-size: $font-size-lg;
 
-      // --- TEXTO GRANDE EN MÓVIL ---
+      // --- TEXTO MÓVIL NORMALIZADO ---
       @media (max-width: 768px) {
-        font-size: 1.15rem; // Aprox 18px
-        line-height: 1.7;   // Mayor interlineado
-        color: $text-color; // Mayor contraste
+        font-size: 0.95rem; // ~15px (Ideal para lectura en móvil)
+        line-height: 1.6;   // Buen interlineado
+        color: $text-color; 
       }
     }
 
@@ -35,11 +40,11 @@
     
     .button {
       margin-top: 1rem;
-      // Botón ancho en móvil
       @media (max-width: 768px) {
-        display: block;
-        width: 100%;
-        text-align: center;
+        display: inline-block; // Que no ocupe todo el ancho
+        width: auto;
+        font-size: 0.9rem; // Botón tamaño normal
+        padding: 0.6rem 1.2rem;
       }
     }
   }
@@ -49,8 +54,10 @@
     max-width: 300px;
     
     @media (max-width: 900px) {
-      margin: 50px auto 0;
-      max-width: 280px; // Tamaño controlado pero visible
+      // --- FOTO MÁS PEQUEÑA ---
+      margin: 20px auto 0; // Centrada con un poco de margen arriba
+      max-width: 180px;    // Tamaño controlado (antes 280px)
+      width: 100%;
     }
   }
 
@@ -73,6 +80,12 @@
       border-radius: $border-radius;
       z-index: -1;
       transition: all $transition-speed ease;
+      
+      // En móvil hacemos el borde decorativo más sutil
+      @media (max-width: 768px) {
+        top: 10px;
+        left: 10px;
+      }
     }
   }
 
@@ -80,16 +93,15 @@
     position: relative;
     width: 100%;
     border-radius: $border-radius;
-    //filter: grayscale(100%) contrast(1); // Filtro inicial
+    filter: grayscale(100%) contrast(1);
     transition: filter 0.3s ease;
+    
+    @media (max-width: 768px) {
+        filter: none; // A color en móvil
+    }
 
     &:hover {
       filter: none;
-    }
-    
-    // En móvil quitamos el filtro para que se vea bien siempre
-    @media (max-width: 768px) {
-        filter: none;
     }
   }
 }
