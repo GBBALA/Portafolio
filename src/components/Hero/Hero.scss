@@ -28,8 +28,8 @@
 
   &__typewriter {
     font-family: $font-family-headings;
-    // Mínimo 1.8rem (aprox 28px) en móvil para que se vea GRANDE
-    font-size: clamp(2.2rem, 7vw, 4.5rem); 
+    // Mínimo más suave para móvil (Nueva regla)
+    font-size: clamp(1.8rem, 6vw, 3.5rem); // ANTES: clamp(2.2rem, 7vw, 4.5rem);
     font-weight: 700;
     color: $white-color;
     margin-bottom: 1.5rem;
@@ -41,7 +41,9 @@
     white-space: normal;
 
     @media (max-width: 768px) {
-        font-size: 2.2rem; // Tamaño fijo grande en móvil
+      // Quitamos el tamaño fijo gigante (Nueva regla)
+      font-size: 2rem; 
+      line-height: 1.2;
     }
 
     .Typewriter__cursor {
@@ -57,9 +59,11 @@
     
     // --- TEXTO DESCRIPTIVO GRANDE ---
     @media (max-width: 768px) {
-      font-size: 1.15rem; // Texto cuerpo grande
-      line-height: 1.6;
+      // Tamaño estándar de lectura (16px) (Nueva regla)
+      font-size: 1rem; // ANTES: 1.15rem
+      line-height: 1.5;
       color: $text-color; // Un poco más claro que dark-text para contraste
+      padding: 0; // Quitamos padding lateral extra (Nueva regla)
     }
   }
 
@@ -70,11 +74,13 @@
     flex-wrap: wrap;
     
     @media (max-width: 768px) {
-        flex-direction: column; // Botones uno encima del otro en móvil
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        gap: 1rem;
+      flex-direction: column; // Botones uno encima del otro en móvil
+      width: 100%;
+      // Hacemos los botones un poco más angostos (Nueva regla)
+      max-width: 280px; // ANTES: 300px
+      margin: 0 auto;
+      // Nuevo espaciado (Nueva regla)
+      gap: 0.8rem; // ANTES: 1rem
     }
   }
 }

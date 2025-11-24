@@ -19,14 +19,15 @@
   padding: 0.75rem 2rem;
   box-shadow: 0 10px 30px -10px rgba(2,12,27,0.9);
 
-  // --- AJUSTE MÓVIL (HACERLO MÁS GRANDE) ---
+  // --- AJUSTE MÓVIL NORMALIZADO (REEMPLAZADO) ---
   @media (max-width: 768px) {
-    width: 90%;       // Un poco menos del borde para que parezca flotante
-    max-width: 400px; // Evita que se estire demasiado en tablets
-    padding: 0.8rem 1.5rem; // ¡MÁS PADDING! Para que se vea más grande
-    border-radius: 30px; 
-    bottom: 30px;     // Flotando abajo
-    top: auto;        // Anular top
+    width: auto;           // ANTES: 90%
+    max-width: 95%;        // ANTES: 400px
+    // Reducimos el padding inflado
+    padding: 0.5rem 1rem;  // ANTES: 0.8rem 1.5rem
+    border-radius: 50px;   // Volvemos a bordes redondos suaves (ANTES: 30px)
+    bottom: 20px;          // ANTES: 30px
+    top: auto;             // Anular top
   }
 
   &--hidden {
@@ -77,11 +78,11 @@
     padding: 0.5rem 0;
     white-space: nowrap; 
 
-    // --- FUENTE MÁS GRANDE EN MÓVIL ---
+    // --- FUENTE MÁS SUTIL EN MÓVIL (REEMPLAZADO) ---
     @media (max-width: 768px) {
-      font-size: 1rem; // 16px es el estándar legible
+      font-size: 0.85rem; // ANTES: 1rem (Volvemos a un tamaño sutil)
       font-weight: 500;
-      color: $white-color; // Blanco puro para mejor contraste en móvil
+      color: $text-color; // Retirado el color blanco puro para usar $text-color por defecto
     }
 
     &:hover {
