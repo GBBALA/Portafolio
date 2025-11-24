@@ -1,166 +1,90 @@
 @use '../../assets/styles/base/variables' as *;
 
-.skills {
-  padding: 100px 0;
-  min-height: 500px;
+.header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); // ESTO LA CENTRA PERFECTAMENTE
+  z-index: 1000;
+  
+  // Tamaño: Que se ajuste al contenido, pero sin salirse de la pantalla
+  width: max-content; 
+  max-width: 92%; // Deja un margen de seguridad a los lados
 
-  @media (max-width: 768px) {
-    padding: 60px 0;
+  transition: top $transition-speed ease;
+
+  // --- ESTILO CÁPSULA (EL ENCANTO) ---
+  background-color: rgba($light-bg-color, 0.75); // Transparencia elegante
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba($white-color, 0.15);
+  border-radius: 50px; // Siempre redonda
+  padding: 0.5rem 1.5rem; // Padding equilibrado
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); // Sombra flotante
+
+  &--hidden {
+    top: -100px;
   }
 
   &__container {
     display: flex;
-    gap: 3rem;
-
-    @media (max-width: 900px) {
-      flex-direction: column;
-      gap: 2rem;
-    }
-  }
-
-  // --- BARRA DE PESTAÑAS HORIZONTAL (MÓVIL) ---
-  &__tabs {
-    display: flex;
-    flex-direction: column; // Vertical en desktop
-    position: relative;
-    flex-shrink: 0;
-
-    // Línea decorativa vertical (Desktop)
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background-color: $light-bg-color;
-    }
-
-    // TRANSFORMACIÓN MÓVIL
-    @media (max-width: 900px) {
-      flex-direction: row; // Horizontal
-      overflow-x: auto;    // Scrollable lateralmente
-      width: 100%;
-      padding-bottom: 1rem; // Espacio para el scroll
-      border-bottom: 1px solid rgba($light-bg-color, 0.5); // Línea base sutil
-      
-      &::before { display: none; } // Ocultamos la línea vertical
-      
-      // Ocultar la barra de scroll fea
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+    // Si el menú es más ancho que la pantalla (móviles muy chicos)
+    @media (max-width: 600px) {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      // Ocultar barra de scroll
       &::-webkit-scrollbar { display: none; }
       scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
+      
+      // Para que el scroll empiece centrado o alineado
+      justify-content: flex-start; 
     }
   }
 
-  &__tab {
-    font-family: $font-family-mono;
-    font-size: 1rem;
-    color: $dark-text-color;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 1rem 1.75rem;
-    text-align: left;
-    white-space: nowrap;
-    // Borde activo izquierdo (Desktop)
-    border-left: 2px solid transparent;
-    transition: all $transition-speed ease;
-    margin-left: -2px;
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 1.5rem; // Espacio entre links
 
-    // AJUSTE MÓVIL (Botones horizontales)
-    @media (max-width: 900px) {
-      border-left: none;
-      border-bottom: 2px solid transparent; // Borde activo abajo
-      margin-left: 0;
-      padding: 0.8rem 1.2rem; // Padding más compacto
-      font-size: 0.9rem;
-      flex-shrink: 0; // Evita que se aplasten
-      text-align: center;
+    @media (max-width: 600px) {
+      gap: 1.2rem; // Un poco más juntos en móvil
+      padding: 0 5px;
+    }
+  }
+
+  &__nav-link {
+    font-family: $font-family-mono;
+    font-size: 0.9rem;
+    color: $text-color;
+    text-decoration: none;
+    white-space: nowrap; // Texto en una línea
+    transition: color $transition-speed ease;
+    
+    // Ajuste móvil sutil
+    @media (max-width: 600px) {
+      font-size: 0.85rem;
     }
 
     &:hover {
       color: $accent-color;
     }
+  }
 
-    // ESTADO ACTIVO
-    &--active {
-      color: $accent-color;
-      // Desktop
-      background-color: rgba($light-bg-color, 0.5);
-      border-left: 2px solid $accent-color;
-
-      // Móvil
-      @media (max-width: 900px) {
-        border-left: none;
-        border-bottom: 2px solid $accent-color;
-        background-color: transparent; // Sin fondo en móvil para look más limpio
-      }
+  // Ajustes Desktop (Mínimos, ya que la cápsula se ve bien en ambos)
+  @media (min-width: 768px) {
+    padding: 0.75rem 2rem;
+    &__nav-list {
+      gap: 2rem;
     }
-  }
-
-  &__content {
-    position: relative;
-    width: 100%;
-    min-height: 300px;
-  }
-
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 2rem;
-    
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    width: 100%;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-
-    &--active {
-      opacity: 1;
-      visibility: visible;
-      position: relative;
+    &__nav-link {
+      font-size: 1rem;
     }
-
-    // Ajuste Móvil para las tarjetas
-    @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 1fr); // 2 columnas fijas
-        gap: 1rem;
-    }
-  }
-}
-
-// Estilos de las tarjetas (ya estaban bien, solo un pequeño ajuste de tamaño)
-.skill-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem 1rem;
-  background-color: $light-bg-color;
-  border-radius: $border-radius;
-  transition: transform $transition-speed ease;
-  min-height: 130px;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-
-  &__logo {
-    height: 50px; 
-    width: 50px;
-    
-    @media (max-width: 768px) {
-        height: 45px;
-        width: 45px;
-    }
-  }
-
-  &__name {
-    color: $text-color;
-    font-family: $font-family-body;
-    font-size: 0.95rem; 
-    text-align: center;
   }
 }
