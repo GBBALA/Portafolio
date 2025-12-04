@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.scss';
-//import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
+// Importamos los mismos iconos que usas en el sidebar para consistencia de diseño
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,6 @@ const Contact = () => {
     }
   };
 
-  // --- SECCIÓN MODIFICADA ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status.submitting) return;
@@ -56,10 +56,7 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      // 1. Interpreta la respuesta como un objeto JSON
       const data = await res.json();
-
-      // 2. Usa el mensaje dentro del objeto JSON
       handleServerResponse(res.ok, data.message || 'Ocurrió un error.');
     
     } catch (error) {
@@ -67,17 +64,14 @@ const Contact = () => {
       handleServerResponse(false, 'Ha ocurrido un error al enviar el mensaje.');
     }
   };
-  // --- FIN DE LA SECCIÓN MODIFICADA ---
 
   return (
     <section className="contact-section" id="contact">
       <div className="contact-form-container">
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <h2 className="contact-form__title">Contacto</h2>
-          <p className="contact-form__subtitle">
-            
-          </p>
-          {/* ... (resto del formulario JSX se mantiene igual) ... */}
+          {/* Eliminé el subtítulo vacío para limpiar el DOM */}
+          
           <div className="contact-form__field">
             <label htmlFor="name" className="contact-form__label">Nombre</label>
             <input
@@ -122,6 +116,7 @@ const Contact = () => {
               {status.submitting ? 'Enviando...' : 'Enviar'}
             </button>
           </div>
+          
           {status.info.msg && (
             <div
               className={`contact-form__status-message ${status.info.error ? 'contact-form__status-message--error' : 'contact-form__status-message--success'}`}
@@ -132,7 +127,31 @@ const Contact = () => {
         </form>
       </div>
 
-     
+      {/* --- NUEVA SECCIÓN DE REDES SOCIALES --- */}
+      {/* Utiliza las clases .social-links ya definidas en tu SCSS */}
+      <div className="social-links">
+        <h3 className="social-links__title">Conéctate conmigo</h3>
+        <div className="social-links__icons">
+          <a 
+            href="https://github.com/GBBALA" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            title="Ver perfil de GitHub"
+          >
+            <FiGithub />
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/javier-quiroga-045940379/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            title="Conectar en LinkedIn"
+          >
+            <FiLinkedin />
+          </a>
+        </div>
+      </div>
+      {/* --- FIN NUEVA SECCIÓN --- */}
+
     </section>
   );
 };
