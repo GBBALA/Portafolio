@@ -2,15 +2,24 @@ import React from 'react';
 import './Projects.scss';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
-// --- Iconos de Tecnología (Importamos todos los necesarios) ---
+// --- Iconos de Tecnología ---
 import { 
   SiNodedotjs, SiExpress, SiPostgresql, SiJsonwebtokens, SiSwagger, 
   SiReact, SiReactrouter, SiSass, SiGooglegemini, SiCloudinary, SiJavascript,
   SiPython, SiSupabase, SiHtml5, SiCss3
 } from 'react-icons/si';
-import { FaDatabase, FaShieldAlt, FaFilePdf, FaCreditCard, FaDesktop, FaCodeBranch, FaCube, FaPencilAlt } from 'react-icons/fa';
+import { 
+  FaDatabase, FaShieldAlt, FaFilePdf, FaCreditCard, FaDesktop, FaCodeBranch, FaCube, FaPencilAlt 
+} from 'react-icons/fa';
 
-// --- Definiciones de Tecnologías para cada Proyecto ---
+// --- 1. Definiciones de Tecnologías para cada Proyecto ---
+
+const bomberosTechnologies = [
+  { name: 'React', icon: <SiReact />, color: '#61DAFB' },
+  { name: 'Supabase', icon: <SiSupabase />, color: '#3ECF8E' },
+  { name: 'SASS/SCSS', icon: <SiSass />, color: '#CF649A' },
+  { name: 'Cloudinary', icon: <SiCloudinary />, color: '#3448C5' },
+];
 
 const gamerStoreTechnologies = [
   { name: 'Node.js', icon: <SiNodedotjs />, color: '#8CC84B' },
@@ -24,21 +33,6 @@ const gamerStoreTechnologies = [
   { name: 'Mercado Pago', icon: <FaCreditCard />, color: '#00B1EA' },
 ];
 
-const medicalSystemTechnologies = [
-  { name: 'Python 3.12', icon: <SiPython />, color: '#3776AB' },
-  { name: 'Tkinter', icon: <FaDesktop />, color: '#FFD43B' },
-  { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#336791' },
-  { name: 'Supabase', icon: <SiSupabase />, color: '#3ECF8E' },
-  { name: 'MVC', icon: <FaCodeBranch />, color: '#F05032' },
-];
-
-const avatarGameTechnologies = [
-  { name: 'HTML5', icon: <SiHtml5 />, color: '#E34F26' },
-  { name: 'CSS3', icon: <SiCss3 />, color: '#1572B6' },
-  { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
-  { name: 'POO', icon: <FaCube />, color: '#FFFFFF' },
-];
-
 const pernStackTechnologies = [
   { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#336791' },
   { name: 'Express.js', icon: <SiExpress />, color: '#FFFFFF' },
@@ -47,45 +41,58 @@ const pernStackTechnologies = [
   { name: 'CRUD', icon: <FaPencilAlt />, color: '#A0A0A0' },
 ];
 
+const medicalSystemTechnologies = [
+  { name: 'Python 3.12', icon: <SiPython />, color: '#3776AB' },
+  { name: 'Tkinter', icon: <FaDesktop />, color: '#FFD43B' },
+  { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#336791' },
+  { name: 'Supabase', icon: <SiSupabase />, color: '#3ECF8E' },
+  { name: 'MVC', icon: <FaCodeBranch />, color: '#F05032' },
+];
+
+
+
+// --- 2. Integración de Datos (Array Principal) ---
+// Nota: Cambié 'tech' por 'technologies' y ajusté 'repoUrl' / 'liveUrl' para que coincida con tu JSX.
 const projectData = [
   {
     id: 1,
-    title: 'Plataforma E-commerce "GamerStore Genezis"',
-    description: 'E-commerce full-stack con lógica de negocio compleja: autenticación por roles (JWT), gestión de inventario, panel de administración, flujo de pago transaccional con Mercado Pago y generación de especificaciones de productos mediante IA (Google Gemini).',
-    technologies: gamerStoreTechnologies,
-    liveUrl: 'https://gamerstore-genezis.vercel.app/',
-    repoUrl: 'https://github.com/GBBALA/GAMERSTORE-GENEZIS',
-    image: '/projects/gamerstore-project.webp'
+    title: "Bomberos Central 27 - Sistema Integral",
+    description: "Desarrollo Full Stack end-to-end de un portal público y un Dashboard administrativo con rutas protegidas. Implementación de autenticación segura, CRUD complejo para gestión de personal/inventario, y procesamiento de imágenes en el cliente.",
+    image: "/projects/bomberos-project.webp", 
+    technologies: bomberosTechnologies,
+    repoUrl: "https://github.com/gbbala/bomberos-central-27",
+    liveUrl: "https://bomberosbuta.com" // Reemplaza con tu Vercel si existe
   },
-  {
+    {
     id: 2,
-    title: 'Sistema Integral de Turnos Médicos',
-    description: 'Aplicación de escritorio con arquitectura MVC para la gestión centralizada de turnos. Incluye módulos por rol, gestión de agenda médica, prevención de superposición de horarios y reportes de gestión.',
-    technologies: medicalSystemTechnologies,
-    liveUrl: null,
-    repoUrl: 'https://github.com/PowerSystem2024/PowerSystem2024-App-StartUp-Genezis',
-    image: '/projects/medical-appointment-project.webp'
+    title: "GamerStore",
+    description: "Simulación de e-commerce de productos tecnológicos. Incluye catálogo dinámico, filtrado de productos y un carrito de compras gestionado mediante el Context API de React.",
+    image: "/projects/gamerstore-project.webp",
+    technologies: gamerStoreTechnologies,
+    repoUrl: "https://github.com/gbbala/GamerStore",
+    liveUrl: "https://gamerstore-genezis.vercel.app "
   },
   {
     id: 3,
-    title: 'Juego de Combate: La Leyenda de Aang',
-    description: 'Juego web interactivo de combate por turnos. Implementa lógica con POO (Clases en JS) para modelar personajes con fortalezas, debilidades y un sistema de daño variable.',
-    technologies: avatarGameTechnologies,
-    liveUrl: null, // Si tienes un deploy, pon la URL aquí
-    repoUrl: 'https://github.com/GBBALA/MOKEPON', // Asumo que este es el repo
-    image: '/projects/avatar-game-project.webp'
+    title: "Medical Appointments",
+    description: "Gestor de turnos médicos interactivo. Destaca por el manejo de estado complejo en el lado del cliente y la validación estricta de formularios para una mejor experiencia de usuario.",
+    image: "/projects/medical-appointment-project.webp",
+    technologies: medicalSystemTechnologies,
+    repoUrl: "https://github.com/gbbala/citas-medicas",
+    liveUrl: ""
   },
   {
     id: 4,
-    title: 'PROYECTO PERN: Autenticación y Tareas',
-    description: 'Aplicación web Full-Stack con Stack PERN. Implementa un sistema completo de autenticación de usuarios (JWT) y un módulo de gestión de tareas con operaciones CRUD seguras.',
+    title: "PERN Stack Tasks",
+    description: "Aplicación de gestión de tareas Full Stack. Arquitectura RESTful robusta que permite operaciones CRUD completas y conexión eficiente entre el cliente y el servidor de base de datos.",
+    image: "/projects/pern-tasks-project.webp",
     technologies: pernStackTechnologies,
-    liveUrl: null, // Si tienes un deploy, pon la URL aquí
-    repoUrl: 'https://github.com/GBBALA/PERN-Task-manager', // Asumo que este es el repo
-    image: '/projects/pern-tasks-project.webp'
-  }
+    repoUrl: "https://github.com/gbbala/PERN-tasks",
+    liveUrl: "" // Dejar vacío si no hay demo, el botón se ocultará automáticamente
+  },
 ];
 
+// --- 3. Componente de Renderizado ---
 const Projects = () => {
   return (
     <section id="projects" className="projects">
@@ -95,6 +102,7 @@ const Projects = () => {
           {projectData.map((project, index) => (
             <div key={project.id} className={`project ${index % 2 === 1 ? 'project--reversed' : ''}`}>
               <div className="project__image-container">
+                {/* Fallback de link en imagen: Si no hay liveUrl, redirige al repoUrl */}
                 <a href={project.liveUrl || project.repoUrl} target="_blank" rel="noopener noreferrer">
                   <img src={project.image} alt={`Captura de pantalla del proyecto ${project.title}`} className="project__image" /> 
                 </a>
@@ -105,6 +113,7 @@ const Projects = () => {
                 <div className="project__description">
                   <p>{project.description}</p>
                 </div>
+                
                 {/* --- SECCIÓN DE TECNOLOGÍAS CON ICONOS --- */}
                 <ul className="project__technologies">
                   {project.technologies.map(tech => (
@@ -114,10 +123,16 @@ const Projects = () => {
                     </li>
                   ))}
                 </ul>
+
                 <div className="project__links">
-                  <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" title="Ver código en GitHub"><FiGithub /></a>
+                  <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" title="Ver código en GitHub">
+                    <FiGithub />
+                  </a>
+                  {/* Renderizado condicional: El botón de demo solo aparece si liveUrl tiene texto */}
                   {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" title="Ver demo en vivo"><FiExternalLink /></a>
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" title="Ver demo en vivo">
+                      <FiExternalLink />
+                    </a>
                   )}
                 </div>
               </div>
